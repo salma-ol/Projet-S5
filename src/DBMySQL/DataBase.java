@@ -401,9 +401,9 @@ public class DataBase {
         
         //tableau des ventes pour chaqye session
         ArrayList<Integer> sales = new ArrayList<>();
-        for(int i=0; i<sessionList.size() ; i++){
+        for (Integer session : sessionList) {
             state = connection.prepareStatement("SELECT sales.Number FROM `sales`WHERE sales.ID_Session = ?");
-            state.setInt(1, sessionList.get(i));
+            state.setInt(1, session);
             result = state.executeQuery();
             int tot = 0; 
             while (result.next()) {
