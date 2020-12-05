@@ -66,7 +66,7 @@ public class GUImovieTheatre extends JFrame implements ActionListener, ItemListe
     private final JButton buyTickets = new JButton("BUY TICKETS");
     private final JButton back = new JButton("BACK");
 
-    private JComboBox<String> shopping;
+    private JComboBox shopping;
 
     private final JComboBox<Timestamp> sessionsDate = new JComboBox<>();
 
@@ -90,7 +90,7 @@ public class GUImovieTheatre extends JFrame implements ActionListener, ItemListe
             panel.add(new JLabel("WELCOME TO YOU  !")).setBounds(880, 70, 200, 20);
         } else {
             panel.add(new JLabel("WELCOME BACK  " + customer.getID().toUpperCase() + " !")).setBounds(855, 70, 200, 20);
-            shopping = new JComboBox(mysql.getSales(customer.getID()).toArray());
+            shopping = new JComboBox<>(mysql.getSales(customer.getID()).toArray());
             basket.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
