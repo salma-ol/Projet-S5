@@ -49,7 +49,7 @@ public class MovieTheatre extends JFrame {
     private final JButton back = new JButton("BACK");
     private final JButton home = new JButton("Home Page");
 
-    private JComboBox<String> shopping;
+    private JComboBox shopping;
 
     private final JComboBox<Timestamp> sessionsDate = new JComboBox<>();
 
@@ -73,7 +73,7 @@ public class MovieTheatre extends JFrame {
             panel.add(new JLabel("WELCOME TO YOU  !")).setBounds(880, 70, 200, 20);
         } else {
             panel.add(new JLabel("WELCOME BACK  " + customer.getID().toUpperCase() + " !")).setBounds(855, 70, 200, 20);
-            shopping = new JComboBox(mysql.getSales(customer.getID()).toArray());
+            shopping = new JComboBox<>(mysql.getSales(customer.getID()).toArray());
             basket.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -233,7 +233,7 @@ public class MovieTheatre extends JFrame {
         return purchase;
     }
 
-    public JComboBox<String> getShopping() {
+    public JComboBox getShopping() {
         return shopping;
     }
 
