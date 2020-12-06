@@ -6,10 +6,16 @@
 package View;
 
 import Controller.login;
-import User.User;
+import Modele.User;
 import Modele.Database;
 import java.awt.Color;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -72,11 +78,11 @@ public class GUIlogin extends JDialog{
         return user;
     }
 
-    public static boolean getIsCustomer() {
+    public boolean getIsCustomer() {
         return isCustomer;
     }
 
-    public static Database getMysql() {
+    public Database getMysql() {
         return mysql;
     }
 
@@ -104,8 +110,7 @@ public class GUIlogin extends JDialog{
         return cancel;
     }
 
-    public static void setUser(User user) {
+    public void setUser(User user) {
         GUIlogin.user = user;
-    }
-    
+    } 
 }

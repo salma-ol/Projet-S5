@@ -5,7 +5,7 @@
  */
 package View;
 
-import User.User;
+import Modele.User;
 import Controller.homePage;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -71,7 +71,7 @@ public class GUIhomePage extends JFrame {
         build();
     }
 
-    public static User getUser() {
+    public User getUser() {
         return user;
     }
 
@@ -103,7 +103,7 @@ public class GUIhomePage extends JFrame {
         return confirm;
     }
 
-    public static void setUser(User user) {
+    public void setUser(User user) {
         GUIhomePage.user = user;
     }
 }

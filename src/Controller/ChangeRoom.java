@@ -5,13 +5,20 @@
  */
 package Controller;
 
-import View.*;
-import java.awt.event.*;
+import View.GUIchangeRoom;
+import View.GUIemployee;
+import Modele.Session;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
-import org.jfree.chart.*;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
@@ -87,10 +94,10 @@ public class ChangeRoom implements ActionListener, ItemListener{
                 salesPerSession = change.getMysql().getSalesOfaMovie(change.getMoviesList().get(change.getMovies().getSelectedIndex()).getID()) ; 
                 DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
 
-                for(int i=0; i<salesPerSession.length; i++){
-                   for(int j=0 ; j<salesPerSession[i].length ; j++){
-                       dataset.addValue(salesPerSession[i][j], Integer.toString(salesPerSession[i][0]), " "); 
-                   }
+                for (int[] salesPerSession1 : salesPerSession) {
+                    for (int j = 0; j < salesPerSession1.length; j++) {
+                        dataset.addValue(salesPerSession1[j], Integer.toString(salesPerSession1[0]), " ");
+                    }
                 }
                 JFreeChart barChart = ChartFactory.createBarChart("Vente pour chaque Session", "session", 
                   "Nombre de place vendue", dataset, PlotOrientation.VERTICAL, true, true, false); 

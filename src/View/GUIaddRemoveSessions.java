@@ -5,12 +5,19 @@
  */
 package View;
 
+import Modele.Session;
+import Modele.Movie;
 import Controller.AddRemoveSession;
 import Modele.Database;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -86,7 +93,7 @@ public class GUIaddRemoveSessions extends JDialog{
         build();
     }
 
-    public static Database getMysql() {
+    public Database getMysql() {
         return mysql;
     }
 
@@ -124,7 +131,5 @@ public class GUIaddRemoveSessions extends JDialog{
 
     public JButton getCancel() {
         return cancel;
-    }
-    
-    
+    }  
 }

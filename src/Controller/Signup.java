@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import View.*;
+import View.GUIsignup;
 import com.itextpdf.text.DocumentException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -74,5 +74,4 @@ public class Signup implements ActionListener {
             sign.getRegistrationFailed().setText("Please complete all fields !");
         }
     }
-    
 }

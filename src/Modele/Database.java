@@ -5,8 +5,6 @@
  */
 package Modele;
 
-import View.*;
-import User.User;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -37,7 +35,7 @@ public class Database {
 
     private void connectionDatabase() throws SQLException {
         //System.out.println("Connexion");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/movie_theater?autoReconnect=true&useSSL=false", "root", "DevOps197364285");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_theatre?autoReconnect=true&useSSL=false", "root", "");
     }
 
     private boolean deconnectionDatabase() throws SQLException {
@@ -418,5 +416,4 @@ public class Database {
         deconnectionDatabase();
         return salesPerSessions ;
     }
-    
 }

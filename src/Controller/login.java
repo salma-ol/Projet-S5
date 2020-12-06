@@ -44,6 +44,5 @@ public class login implements ActionListener {
         } else {
             log.getErrorAuthentification().setText("Please complete all fields ! Try again ...");
         }
-    }
-    
+    }    
 }

@@ -5,8 +5,10 @@
  */
 package Controller;
 
-import View.*;
-import java.awt.event.*;
+import View.GUIaddRemoveMovies;
+import View.GUIaddRemoveSessions;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -14,8 +16,15 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.*;
-import javax.swing.text.*;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.text.DateFormatter;
+import javax.swing.text.DefaultFormatterFactory;
 
 /**
  *
@@ -117,6 +126,5 @@ public class AddRemoveMovies implements ActionListener{
         } else if (!update) {
             change.getErrorModification().setText("You can't remove this Movie, it has Session(s) in progress");
         }
-    }
-    
+    }   
 }
