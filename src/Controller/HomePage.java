@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class HomePage implements ActionListener{
     
     private final GUIhomePage home;
+    
     public HomePage(GUIhomePage home){
         this.home = home;
     }
