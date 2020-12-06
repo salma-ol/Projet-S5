@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.login;
+import Controller.Login;
 import Modele.User;
 import Modele.Database;
 import java.awt.Color;
@@ -58,8 +58,8 @@ public class GUIlogin extends JDialog{
         panel.add(new JLabel("Password :")).setBounds(95, 95, 80, 20);
         panel.add(password).setBounds(195, 95, 200, 20);
 
-        confirm.addActionListener(new login(this));
-        cancel.addActionListener(new login(this));
+        confirm.addActionListener(new Login(this));
+        cancel.addActionListener(new Login(this));
 
         panel.add(confirm).setBounds(95, 150, 100, 20);
         panel.add(cancel).setBounds(295, 150, 100, 20);

@@ -17,11 +17,11 @@ import java.util.logging.Logger;
  *
  * @author noemi
  */
-public class login implements ActionListener {
+public class Login implements ActionListener {
     
     private final GUIlogin log;
     
-    public login(GUIlogin log){
+    public Login(GUIlogin log){
         this.log = log;
     }
     

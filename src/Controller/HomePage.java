@@ -21,10 +21,10 @@ import java.util.logging.Logger;
  *
  * @author noemi
  */
-public class homePage implements ActionListener{
+public class HomePage implements ActionListener{
     
     private final GUIhomePage home;
-    public homePage(GUIhomePage home){
+    public HomePage(GUIhomePage home){
         this.home = home;
     }
     

@@ -6,7 +6,7 @@
 package View;
 
 import Modele.User;
-import Controller.homePage;
+import Controller.HomePage;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import javax.swing.ButtonGroup;
@@ -59,7 +59,7 @@ public class GUIhomePage extends JFrame {
         panel.add(member);
         panel.add(employee);
 
-        confirm.addActionListener(new homePage(this));
+        confirm.addActionListener(new HomePage(this));
 
         panel.add(confirm);
 
