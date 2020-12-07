@@ -27,6 +27,7 @@ public class MailIo {
 
     private final String username = "UGCECE@gmail.com";
     private final String password = "ProjetInfo";
+    private int i = 0;
 
     public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
@@ -54,12 +55,22 @@ public class MailIo {
 
         BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
+<<<<<<< Updated upstream:src/View/MailIo.java
         template.setFontAndSize(bf, 9);
         template.setTextMatrix(220, 500);
         template.showText("Summary of your order : ");
         template.setTextMatrix(220, 320);
         template.showText(number_place + " tickets for " + movie);
         template.setTextMatrix(220, 310);
+=======
+        template.setFontAndSize(bf, 23);
+        template.setTextMatrix(250, 80);
+        template.showText(movie);
+        template.setFontAndSize(bf, 12);
+        template.setTextMatrix(8, 30);
+        template.showText(number_place + " tickets");
+        template.setTextMatrix(8, 20);
+>>>>>>> Stashed changes:src/Controller/MailIo.java
         template.showText("Final price : " + price * number_place + "€");
         template.setTextMatrix(220, 300);
         template.showText("Projection Room : " + room + " , the " + date);
@@ -87,8 +98,7 @@ public class MailIo {
 
         // Etape 1 : Création de la session
         String Newligne = System.getProperty("line.separator");
-        Barcode b = BarcodeFactory.createBarcode(BarcodeType.Code128, mail);
-        b.export("png", 1, 50, false, "barcode.png");
+        
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -148,7 +158,7 @@ public class MailIo {
         // Etape 1 : Création de la session
         String Newligne = System.getProperty("line.separator");
         Barcode b = BarcodeFactory.createBarcode(BarcodeType.Code128, email);
-        b.export("png", 1, 50, false, "barcode.png");
+        b.export("png", 1, 50, false, "./Barcode/barcode_"+id+"_"+i+".png");
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -183,7 +193,7 @@ public class MailIo {
             multipart.addBodyPart(messageBodyPart);
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            generer("barcode.png", file_movie, outputStream, date, place, room, price);
+            generer("./Barcode/barcode"+id+"_"+i+".png", file_movie, outputStream, date, place, room, price);
             byte[] bytes = outputStream.toByteArray();
 
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
