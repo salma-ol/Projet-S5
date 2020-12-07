@@ -49,8 +49,10 @@ public class HomePage implements ActionListener{
                 } else {
                     GUIemployee employeeInterface = new GUIemployee();
                 }
-            } catch (ClassNotFoundException | SQLException ex) {
+            } catch (ClassNotFoundException | SQLException ex ) {
                 Logger.getLogger(GUIhomePage.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (Throwable ex) {
+                Logger.getLogger(HomePage.class.getName()).log(Level.SEVERE, null, ex);
             }
             home.dispose();
         }

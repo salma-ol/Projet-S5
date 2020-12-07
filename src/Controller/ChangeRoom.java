@@ -15,17 +15,16 @@ import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+<<<<<<< HEAD
 import javax.swing.JDialog;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
+=======
+>>>>>>> main
 
-/**
- *
- * @author noemi
- */
 public class ChangeRoom implements ActionListener, ItemListener{
     
     private final GUIchangeRoom change;
@@ -88,6 +87,7 @@ public class ChangeRoom implements ActionListener, ItemListener{
                 Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+<<<<<<< HEAD
         else if (event.getSource() == change.getGraph()){
             int[][] salesPerSession ; 
             try { 
@@ -109,5 +109,7 @@ public class ChangeRoom implements ActionListener, ItemListener{
                 Logger.getLogger(GUIchangeRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+=======
+>>>>>>> main
     }
 }

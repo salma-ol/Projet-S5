@@ -74,12 +74,23 @@ public class MovieTheatre implements ActionListener, ItemListener {
                     if (payment.getEmail() != null && payment.getId() != null) {
                         JOptionPane.showMessageDialog(theatre, "The purchase of your Ticket(s) has been completed successfully.\n\nAn Email has been sent to " + payment.getEmail() + " with your Ticket(s)", "Purchase complete !", JOptionPane.INFORMATION_MESSAGE);
                         MailIo pdf = new MailIo();
+<<<<<<< HEAD
+=======
+                        
+>>>>>>> main
                         for (Movie movies : theatre.getMoviesList()) {
                             if (movies.getID() == theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getIDMovie()) {
                                 try {
                                     pdf.envoyer_reservation(payment.getEmail(), payment.getId(), movies.getName(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getDate(), Integer.parseInt(theatre.getNumberOfTickets().getText()), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getRoom(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getPrice());
+<<<<<<< HEAD
                                 } catch (MessagingException | DocumentException ex) {
                                     Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
+=======
+                                } catch (DocumentException ex) {
+                                    Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (MessagingException ex) {
+                                    Logger.getLogger(Movie_Theatre.class.getName()).log(Level.SEVERE, null, ex);
+>>>>>>> main
                                 }
                             }
                         }
@@ -93,6 +104,10 @@ public class MovieTheatre implements ActionListener, ItemListener {
             theatre.getPurchase().setVisible(false);
             theatre.getShopping().setVisible(false);
             theatre.getBack().setVisible(false);
+<<<<<<< HEAD
+=======
+            theatre.getCP().setVisible(false) ; 
+>>>>>>> main
         } else {
             theatre.getTicketError().setText("Please enter a number of tickets !");
         }

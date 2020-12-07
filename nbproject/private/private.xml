@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/noemi/OneDrive/Documents/Projet-S5/src/Modele/Database.java</file>
             <file>file:/C:/Users/noemi/OneDrive/Documents/Projet-S5/src/Controller/EmployeeController.java</file>
             <file>file:/C:/Users/noemi/OneDrive/Documents/Projet-S5/src/Controller/homePage.java</file>
@@ -16,6 +17,10 @@
             <file>file:/C:/Users/noemi/OneDrive/Documents/Projet-S5/src/Controller/Movie_Theatre.java</file>
             <file>file:/C:/Users/noemi/OneDrive/Documents/Projet-S5/src/Controller/MailIo.java</file>
             <file>file:/C:/Users/noemi/OneDrive/Documents/Projet-S5/src/View/GUIpayment.java</file>
+=======
+            <file>file:/C:/Users/DELL/Documents/GitHub/Projet-S5/src/Controller/CheckData.java</file>
+            <file>file:/C:/Users/DELL/Documents/GitHub/Projet-S5/src/View/GUICheckData.java</file>
+>>>>>>> main
         </group>
     </open-files>
 </project-private>
