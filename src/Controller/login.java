@@ -25,7 +25,6 @@ public class Login implements ActionListener {
         this.log = log;
     }
     
-    @Override
     public void actionPerformed(ActionEvent event) {
         if (event.getSource() == log.getCancel()) {
             log.dispose();
