@@ -11,6 +11,7 @@ import com.barcode_coder.java_barcode.BarcodeType;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import java.io.IOException;
 import java.util.Properties;
 import com.itextpdf.text.pdf.BaseFont;
@@ -45,17 +46,16 @@ public class MailIo {
     public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
         Image png = Image.getInstance("pdf.png");
-        Image jpeg = Image.getInstance("./Movies/" + movie + ".jpg");
         Image jpg = Image.getInstance(barcode);
 
-        png.setAbsolutePosition(100f, 200f);
-        jpg.setAbsolutePosition(240f, 620f);
-        jpeg.setAbsolutePosition(250f, 435f);
+        png.setAbsolutePosition(0f, 0f);
+        jpg.setAbsolutePosition(220f, 5f);
 
         jpg.scaleToFit(jpg.getWidth() / 2, jpg.getHeight() / 2);
-        jpeg.scaleToFit(jpeg.getWidth() / 3, jpeg.getHeight() / 3);
+        
 
         Document document = new Document();
+        document.setPageSize(new Rectangle(0,0, png.getWidth(), png.getHeight()));
 
         PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
@@ -66,22 +66,24 @@ public class MailIo {
 
         template.beginText();
 
-        BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+        BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-        template.setFontAndSize(bf, 9);
-        template.setTextMatrix(220, 500);
-        template.showText("Summary of your order : ");
-        template.setTextMatrix(220, 320);
-        template.showText(number_place + " tickets for " + movie);
-        template.setTextMatrix(220, 310);
+        template.setFontAndSize(bf, 23);
+        template.setTextMatrix(200, 80);
+        template.showText(movie);
+        template.setFontAndSize(bf, 12);
+        template.setTextMatrix(8, 30);
+        template.showText(number_place + " tickets");
+        template.setTextMatrix(8, 20);
         template.showText("Final price : " + price * number_place + "€");
-        template.setTextMatrix(220, 300);
-        template.showText("Projection Room : " + room + " , the " + date);
+        template.setTextMatrix(8, 10);
+        template.showText("Projection Room : " + room);
+        template.setTextMatrix(8, 0);
+        template.showText("" + date);
         template.endText();
         contentByte.addTemplate(template, 10, 100);
 
         document.add(png);
-        document.add(jpeg);
         document.add(jpg);
 
         document.close();
@@ -185,7 +187,7 @@ public class MailIo {
             message.setFrom(new InternetAddress("UGCECE@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
-            message.setSubject("Activation of your Account");
+            message.setSubject("Your Reservation");
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
