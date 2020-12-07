@@ -15,8 +15,11 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -24,6 +27,11 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
  *
@@ -39,6 +47,8 @@ public class GUIMovieTheatre extends JFrame {
     private static int movieNumber = 0;
 
     private final JPanel panel = new JPanel();
+
+    private ChartPanel CP = new ChartPanel(null);
 
     private JLabel movie;
     private final JLabel name = new JLabel();
@@ -62,7 +72,7 @@ public class GUIMovieTheatre extends JFrame {
 
     private final JComboBox<Timestamp> sessionsDate = new JComboBox<>();
 
-    private void build() throws ClassNotFoundException, SQLException {
+    private void build() throws ClassNotFoundException, SQLException, Throwable {
         setTitle("Welcome to my movie theatre");
         setSize(1250, 800);
         setLocationRelativeTo(null);
@@ -74,7 +84,7 @@ public class GUIMovieTheatre extends JFrame {
         setVisible(true);
     }
 
-    private JPanel buildContentPane() throws ClassNotFoundException, SQLException {
+    private JPanel buildContentPane() throws ClassNotFoundException, SQLException, Throwable {
         panel.setLayout(null);
         panel.setBackground(Color.yellow);
 
@@ -83,6 +93,7 @@ public class GUIMovieTheatre extends JFrame {
         } else {
             panel.add(new JLabel("WELCOME BACK  " + customer.getID().toUpperCase() + " !")).setBounds(855, 70, 200, 20);
             shopping = new JComboBox<>(mysql.getSales(customer.getID()).toArray());
+            CP = chart();
             basket.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
@@ -92,12 +103,14 @@ public class GUIMovieTheatre extends JFrame {
                     purchase.setVisible(true);
                     shopping.setVisible(true);
                     back.setVisible(true);
-            
+                    CP.setVisible(true);
                 }
             });
             back.addActionListener(new MovieTheatre(this));
-
             panel.add(basket).setBounds(950, 20, 500, 20);
+            
+            panel.add(CP).setBounds(440, 200, 400, 400);
+            CP.setVisible(false);
             panel.add(purchase).setBounds(570, 80, 140, 20);
             purchase.setVisible(false);
             panel.add(shopping).setBounds(390, 150, 500, 30);
@@ -144,6 +157,21 @@ public class GUIMovieTheatre extends JFrame {
         return panel;
     }
 
+    public ChartPanel chart() throws SQLException {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        for (int i = 0; i < moviesList.size(); i++) {
+            dataset.addValue(mysql.getSalesOfaMovieByCustomer(moviesList.get(i).getID(),
+                    String.valueOf(customer.getID())), moviesList.get(i).getName(), " ");
+        }
+        JFreeChart barChart = ChartFactory.createBarChart("Tickets bought", "Name of the movies",
+                "Number of tickets", dataset, PlotOrientation.VERTICAL, true, true, false);
+        return new ChartPanel(barChart) { // this is the trick to manage setting the size of a chart into a panel!
+            public Dimension getPreferredSize() {
+                return new Dimension(400, 400);
+            }
+        };
+    }
+
     public void nextMovie() throws SQLException {
         name.setText("Name:  " + moviesList.get(movieNumber).getName());
         director.setText("Director:  " + moviesList.get(movieNumber).getDirector());
@@ -168,7 +196,7 @@ public class GUIMovieTheatre extends JFrame {
         repaint();
     }
 
-    public GUIMovieTheatre(MemberCustomer member) throws ClassNotFoundException, SQLException {
+    public GUIMovieTheatre(MemberCustomer member) throws ClassNotFoundException, SQLException, Throwable {
         super();
         customer = member;
         build();
@@ -252,5 +280,10 @@ public class GUIMovieTheatre extends JFrame {
 
     public JButton getHome() {
         return home;
-    } 
+    }
+
+    public ChartPanel getCP() {
+        return CP;
+    }
+
 }

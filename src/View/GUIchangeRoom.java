@@ -41,7 +41,6 @@ public class GUIchangeRoom extends JDialog {
 
     private final JButton confirm = new JButton("CONFIRM");
     private final JButton cancel = new JButton("CANCEL");
-    private final JButton graph = new JButton("Graph");
 
     private final JComboBox<String> movies = new JComboBox<>();
     private final JComboBox<Timestamp> sessions = new JComboBox<>();
@@ -96,9 +95,7 @@ public class GUIchangeRoom extends JDialog {
 
         confirm.addActionListener(new ChangeRoom(this));
         cancel.addActionListener(new ChangeRoom(this));
-        graph.addActionListener(new ChangeRoom(this));
-        
-        panel.add(graph).setBounds(240, 315, 100, 20); ;
+
         panel.add(confirm).setBounds(160, 360, 100, 20);
         panel.add(cancel).setBounds(320, 360, 100, 20);
  
@@ -150,10 +147,6 @@ public class GUIchangeRoom extends JDialog {
 
     public JButton getCancel() {
         return cancel;
-    }
-
-    public JButton getGraph() {
-        return graph;
     }
 
     public JComboBox<String> getMovies() {
