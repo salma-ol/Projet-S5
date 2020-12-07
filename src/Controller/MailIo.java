@@ -27,7 +27,7 @@ public class MailIo {
 
     private final String username = "UGCECE@gmail.com";
     private final String password = "ProjetInfo";
-    private int i = 0;
+    private final int i = 0;
 
     public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
@@ -146,6 +146,7 @@ public class MailIo {
     /**
      *
      * @param email
+     * @param id
      * @param file_movie
      * @param date
      * @param place
@@ -179,7 +180,7 @@ public class MailIo {
             message.setFrom(new InternetAddress("UGCECE@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
-            message.setSubject("Activation of your Account");
+            message.setSubject("Here are your tickets");
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
@@ -193,7 +194,7 @@ public class MailIo {
             multipart.addBodyPart(messageBodyPart);
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            generer("./Barcode/barcode"+id+"_"+i+".png", file_movie, outputStream, date, place, room, price);
+            generer("./Barcode/barcode_"+id+"_"+i+".png", file_movie, outputStream, date, place, room, price);
             byte[] bytes = outputStream.toByteArray();
 
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
