@@ -3,17 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controller;
+package View;
 
-import com.barcode_coder.java_barcode.Barcode;
-import com.barcode_coder.java_barcode.BarcodeFactory;
-import com.barcode_coder.java_barcode.BarcodeType;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Image;
-import com.itextpdf.text.Rectangle;
 import java.io.IOException;
 import java.util.Properties;
+import java.util.logging.*;
+import javax.mail.*;
+import javax.mail.internet.*;
+import com.barcode_coder.java_barcode.*;
+import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfContentByte;
 import com.itextpdf.text.pdf.PdfTemplate;
@@ -22,40 +20,29 @@ import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.sql.Timestamp;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.activation.*;
 import javax.mail.util.ByteArrayDataSource;
 
 public class MailIo {
 
     private final String username = "UGCECE@gmail.com";
     private final String password = "ProjetInfo";
+    private int i = 0;
 
     public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
         Image png = Image.getInstance("pdf.png");
+        Image jpeg = Image.getInstance("./Movies/" + movie + ".jpg");
         Image jpg = Image.getInstance(barcode);
 
-        png.setAbsolutePosition(0f, 0f);
-        jpg.setAbsolutePosition(220f, 5f);
+        png.setAbsolutePosition(100f, 200f);
+        jpg.setAbsolutePosition(240f, 620f);
+        jpeg.setAbsolutePosition(250f, 435f);
 
         jpg.scaleToFit(jpg.getWidth() / 2, jpg.getHeight() / 2);
-        
+        jpeg.scaleToFit(jpeg.getWidth() / 3, jpeg.getHeight() / 3);
 
         Document document = new Document();
-        document.setPageSize(new Rectangle(0,0, png.getWidth(), png.getHeight()));
 
         PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
@@ -66,24 +53,32 @@ public class MailIo {
 
         template.beginText();
 
-        BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+        BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
+<<<<<<< Updated upstream:src/View/MailIo.java
+        template.setFontAndSize(bf, 9);
+        template.setTextMatrix(220, 500);
+        template.showText("Summary of your order : ");
+        template.setTextMatrix(220, 320);
+        template.showText(number_place + " tickets for " + movie);
+        template.setTextMatrix(220, 310);
+=======
         template.setFontAndSize(bf, 23);
-        template.setTextMatrix(200, 80);
+        template.setTextMatrix(250, 80);
         template.showText(movie);
         template.setFontAndSize(bf, 12);
         template.setTextMatrix(8, 30);
         template.showText(number_place + " tickets");
         template.setTextMatrix(8, 20);
+>>>>>>> Stashed changes:src/Controller/MailIo.java
         template.showText("Final price : " + price * number_place + "€");
-        template.setTextMatrix(8, 10);
-        template.showText("Projection Room : " + room);
-        template.setTextMatrix(8, 0);
-        template.showText("" + date);
+        template.setTextMatrix(220, 300);
+        template.showText("Projection Room : " + room + " , the " + date);
         template.endText();
         contentByte.addTemplate(template, 10, 100);
 
         document.add(png);
+        document.add(jpeg);
         document.add(jpg);
 
         document.close();
@@ -103,8 +98,7 @@ public class MailIo {
 
         // Etape 1 : Création de la session
         String Newligne = System.getProperty("line.separator");
-        Barcode b = BarcodeFactory.createBarcode(BarcodeType.Code128, mail);
-        b.export("png", 1, 50, false, "barcode.png");
+        
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -152,21 +146,19 @@ public class MailIo {
     /**
      *
      * @param email
-     * @param id
      * @param file_movie
      * @param date
      * @param place
      * @param room
      * @param price
      * @throws DocumentException
-     * @throws javax.mail.MessagingException
      */
-    public void envoyer_reservation(String email, String id, String file_movie, Timestamp date, int place, int room, float price) throws DocumentException, MessagingException {
+    public void envoyer_reservation(String email, String id, String file_movie, Timestamp date, int place, int room, float price) throws DocumentException {
 
         // Etape 1 : Création de la session
         String Newligne = System.getProperty("line.separator");
         Barcode b = BarcodeFactory.createBarcode(BarcodeType.Code128, email);
-        b.export("png", 1, 50, false, "barcode.png");
+        b.export("png", 1, 50, false, "./Barcode/barcode_"+id+"_"+i+".png");
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -187,7 +179,7 @@ public class MailIo {
             message.setFrom(new InternetAddress("UGCECE@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
-            message.setSubject("Your Reservation");
+            message.setSubject("Activation of your Account");
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
@@ -201,7 +193,7 @@ public class MailIo {
             multipart.addBodyPart(messageBodyPart);
 
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            generer("barcode.png", file_movie, outputStream, date, place, room, price);
+            generer("./Barcode/barcode"+id+"_"+i+".png", file_movie, outputStream, date, place, room, price);
             byte[] bytes = outputStream.toByteArray();
 
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
