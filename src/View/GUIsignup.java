@@ -11,8 +11,16 @@ import DateCalendar.DateLabelFormatter;
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.Properties;
-import javax.swing.*;
-import org.jdatepicker.impl.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
 /**
  *
@@ -105,11 +113,11 @@ public class GUIsignup extends JDialog{
         return registered;
     }
 
-    public static Database getMysql() {
+    public Database getMysql() {
         return mysql;
     }
 
-    public static Calendar getDeadLine() {
+    public Calendar getDeadLine() {
         return deadLine;
     }
 
@@ -157,7 +165,7 @@ public class GUIsignup extends JDialog{
         return cancel;
     }
 
-    public static void setRegistered(boolean registered) {
+    public void setRegistered(boolean registered) {
         GUIsignup.registered = registered;
     }
 }

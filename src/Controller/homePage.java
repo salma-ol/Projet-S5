@@ -5,19 +5,27 @@
  */
 package Controller;
 
-import View.*;
-import java.awt.event.*;
+import View.GUIemployee;
+import View.GUIhomePage;
+import View.GUIlogin;
+import View.GUIsignup;
+import Modele.MemberCustomer;
+import View.GUIMovieTheatre;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.logging.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author noemi
  */
-public class homePage implements ActionListener{
+public class HomePage implements ActionListener{
     
     private final GUIhomePage home;
-    public homePage(GUIhomePage home){
+    
+    public HomePage(GUIhomePage home){
         this.home = home;
     }
     
@@ -38,7 +46,7 @@ public class homePage implements ActionListener{
         } else if (home.getGuest().isSelected() || (home.getUser() != null && home.getMember().isSelected() || home.getEmployee().isSelected())) {
             try {
                 if (home.getMember().isSelected() || home.getGuest().isSelected()) {
-                    MovieTheatre movieTheatre = new MovieTheatre((MemberCustomer) home.getUser());
+                    GUIMovieTheatre movieTheatre = new GUIMovieTheatre((MemberCustomer) home.getUser());
                 } else {
                     GUIemployee employeeInterface = new GUIemployee();
                 }

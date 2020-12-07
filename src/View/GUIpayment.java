@@ -5,13 +5,23 @@
  */
 package View;
 
+import Modele.Session;
+import Modele.MemberCustomer;
 import Controller.Payment;
 import Modele.Database;
-import View.*;
 import java.awt.Color;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
 
 /**
  *
@@ -110,23 +120,23 @@ public class GUIpayment extends JDialog{
         build();
     }
 
-    public static Database getMysql() {
+    public Database getMysql() {
         return mysql;
     }
 
-    public static MemberCustomer getCustomer() {
+    public MemberCustomer getCustomer() {
         return customer;
     }
 
-    public static Session getSession() {
+    public Session getSession() {
         return session;
     }
 
-    public static int getTickets() {
+    public int getTickets() {
         return tickets;
     }
 
-    public static float getPriceTicket() {
+    public float getPriceTicket() {
         return priceTicket;
     }
 
@@ -200,7 +210,5 @@ public class GUIpayment extends JDialog{
 
     public void setId(String id) {
         GUIpayment.id = id;
-    }
-    
-    
+    } 
 }

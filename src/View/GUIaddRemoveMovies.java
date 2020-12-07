@@ -5,12 +5,18 @@
  */
 package View;
 
+import Modele.Movie;
 import Controller.AddRemoveMovies;
 import Modele.Database;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -82,7 +88,7 @@ public class GUIaddRemoveMovies extends JDialog {
         build();
     }
 
-    public static Database getMysql() {
+    public Database getMysql() {
         return mysql;
     }
 
@@ -121,6 +127,4 @@ public class GUIaddRemoveMovies extends JDialog {
     public JButton getCancel() {
         return cancel;
     }
-    
-    
 }

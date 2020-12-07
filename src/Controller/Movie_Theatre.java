@@ -13,6 +13,7 @@ import java.awt.event.*;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.mail.MessagingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -73,6 +74,8 @@ public class Movie_Theatre implements ActionListener, ItemListener {
                                     pdf.envoyer_reservation(payment.getEmail(), payment.getId(), movies.getName(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getDate(), Integer.parseInt(theatre.getNumberOfTickets().getText()), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getRoom(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getPrice());
                                 } catch (DocumentException ex) {
                                     Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
+                                } catch (MessagingException ex) {
+                                    Logger.getLogger(Movie_Theatre.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
                         }

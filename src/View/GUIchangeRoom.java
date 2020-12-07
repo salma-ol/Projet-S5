@@ -5,13 +5,20 @@
  */
 package View;
 
+import Modele.Session;
+import Modele.Movie;
 import Controller.ChangeRoom;
 import Modele.Database;
 import java.awt.Color;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
  *
@@ -52,6 +59,7 @@ public class GUIchangeRoom extends JDialog {
         setVisible(true);
     }
 
+    @SuppressWarnings("empty-statement")
     private JPanel buildContentPane() throws SQLException {
         panel.setLayout(null);
         panel.setBackground(Color.orange);
@@ -163,5 +171,4 @@ public class GUIchangeRoom extends JDialog {
     public void setSessionsList(ArrayList<Session> sessionsList) {
         this.sessionsList = sessionsList;
     }
-    
 }

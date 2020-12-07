@@ -10,9 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-
-import java.text.*;
-import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -80,5 +80,4 @@ public class Payment implements ActionListener {
             payment.getInvalidCard().setText("Complete all fields before purchase !");
         }
     }
-    
 }

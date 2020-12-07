@@ -5,8 +5,6 @@
  */
 package Modele;
 
-import View.*;
-import User.User;
 import java.io.File;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -381,6 +379,19 @@ public class Database {
         deconnectionDatabase();
         return sales;
     }
+    public ArrayList<String> getCustomers() throws SQLException {
+        connectionDatabase();
+        ArrayList<String> customers = new ArrayList<>();
+
+        state = connection.prepareStatement("SELECT ID from `customers`");
+        result = state.executeQuery();
+        while (result.next()) {
+            customers.add(result.getString("ID"));
+        }
+        deconnectionDatabase();
+
+        return customers;
+    }
     
     public int[][] getSalesOfaMovie(int idMovie) throws SQLException {
         connectionDatabase();
@@ -408,6 +419,7 @@ public class Database {
             }
             sales.add(tot) ; 
         }
+        
         int[][] salesPerSessions = new int[sessionList.size()][2] ;
         for(int i=0; i<sessionList.size();i++){
             salesPerSessions[i][0] = sessionList.get(i) ; 
@@ -417,6 +429,38 @@ public class Database {
         }
         deconnectionDatabase();
         return salesPerSessions ;
+    }
+    
+    public int getSalesOfaMovieByCustomer(int idMovie,String idCustomer) throws SQLException {
+        connectionDatabase();
+        
+        //Tableau des sessions du film
+        ArrayList<Integer> sessionList = new ArrayList<>();
+
+        state = connection.prepareStatement("SELECT * from `sessions` WHERE ID_Movie = ?");
+        state.setInt(1, idMovie);
+        result = state.executeQuery();
+
+        while (result.next()) {
+            sessionList.add(result.getInt("ID")) ;
+        }
+        
+        //tableau des ventes pour chaqye session
+        int numbTickets = 0 ;
+        for(int i=0; i<sessionList.size() ; i++){
+            state = connection.prepareStatement("SELECT sales.Number FROM `sales` WHERE sales.ID_Session = ? AND sales.ID_Customer=?");
+            state.setInt(1, sessionList.get(i));
+            state.setString(2, idCustomer);
+            result = state.executeQuery();
+            int tot = 0; 
+            while (result.next()) {
+                tot += result.getInt("sales.Number");
+            }
+            numbTickets +=tot ; 
+        }
+       
+        deconnectionDatabase();
+        return numbTickets ;
     }
     
 }

@@ -8,7 +8,11 @@ package View;
 import Controller.EmployeeController;
 import java.awt.Color;
 import java.sql.SQLException;
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 
 /**
  *
@@ -24,7 +28,6 @@ public class GUIemployee extends JFrame {
     private final JRadioButton changeRoom = new JRadioButton("Change the Room of a Movie Session");
     private final JRadioButton selectDiscount = new JRadioButton("Choose a discount");
     private final JRadioButton checkData = new JRadioButton("Check the DataBase Data");
-
 
     private final JButton confirm = new JButton("CONFIRM");
     private final JButton cancel = new JButton("CANCEL");
@@ -104,7 +107,5 @@ public class GUIemployee extends JFrame {
 
     public JButton getCancel() {
         return cancel;
-    }
-    
-    
+    } 
 }

@@ -5,11 +5,17 @@
  */
 package View;
 
-import Controller.login;
-import User.User;
+import Controller.Login;
+import Modele.User;
 import Modele.Database;
 import java.awt.Color;
-import javax.swing.*;
+import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -52,8 +58,8 @@ public class GUIlogin extends JDialog{
         panel.add(new JLabel("Password :")).setBounds(95, 95, 80, 20);
         panel.add(password).setBounds(195, 95, 200, 20);
 
-        confirm.addActionListener(new login(this));
-        cancel.addActionListener(new login(this));
+        confirm.addActionListener(new Login(this));
+        cancel.addActionListener(new Login(this));
 
         panel.add(confirm).setBounds(95, 150, 100, 20);
         panel.add(cancel).setBounds(295, 150, 100, 20);
@@ -72,11 +78,11 @@ public class GUIlogin extends JDialog{
         return user;
     }
 
-    public static boolean getIsCustomer() {
+    public boolean getIsCustomer() {
         return isCustomer;
     }
 
-    public static Database getMysql() {
+    public Database getMysql() {
         return mysql;
     }
 
@@ -104,8 +110,7 @@ public class GUIlogin extends JDialog{
         return cancel;
     }
 
-    public static void setUser(User user) {
+    public void setUser(User user) {
         GUIlogin.user = user;
-    }
-    
+    } 
 }

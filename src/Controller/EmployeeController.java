@@ -5,7 +5,11 @@
  */
 package Controller;
 
-import View.*;
+import View.GUICheckData;
+import View.GUIaddRemoveMovies;
+import View.GUIaddRemoveSessions;
+import View.GUIchangeRoom;
+import View.GUIemployee;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -43,6 +47,12 @@ public class EmployeeController implements ActionListener{
         } else if (change.getChangeRoom().isSelected()) {
             try {
                 GUIchangeRoom tryChangeRoom = new GUIchangeRoom(change, true);
+            } catch (ClassNotFoundException | SQLException ex) {
+                Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else if (change.getCheckData().isSelected()) {
+            try {
+                GUICheckData check = new GUICheckData(change, true);
             } catch (ClassNotFoundException | SQLException ex) {
                 Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
             }
