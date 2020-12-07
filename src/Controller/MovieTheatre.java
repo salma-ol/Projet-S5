@@ -93,6 +93,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
             theatre.getPurchase().setVisible(false);
             theatre.getShopping().setVisible(false);
             theatre.getBack().setVisible(false);
+            theatre.getCP().setVisible(false) ; 
         } else {
             theatre.getTicketError().setText("Please enter a number of tickets !");
         }

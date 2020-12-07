@@ -15,17 +15,7 @@ import java.awt.event.ItemListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JDialog;
-import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartFrame;
-import org.jfree.chart.JFreeChart;
-import org.jfree.chart.plot.PlotOrientation;
-import org.jfree.data.category.DefaultCategoryDataset;
 
-/**
- *
- * @author noemi
- */
 public class ChangeRoom implements ActionListener, ItemListener{
     
     private final GUIchangeRoom change;
@@ -86,27 +76,6 @@ public class ChangeRoom implements ActionListener, ItemListener{
                 }
             } catch (SQLException ex) {
                 Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-        else if (event.getSource() == change.getGraph()){
-            int[][] salesPerSession ; 
-            try { 
-                salesPerSession = change.getMysql().getSalesOfaMovie(change.getMoviesList().get(change.getMovies().getSelectedIndex()).getID()) ; 
-                DefaultCategoryDataset dataset = new DefaultCategoryDataset(); 
-
-                for (int[] salesPerSession1 : salesPerSession) {
-                    for (int j = 0; j < salesPerSession1.length; j++) {
-                        dataset.addValue(salesPerSession1[j], Integer.toString(salesPerSession1[0]), " ");
-                    }
-                }
-                JFreeChart barChart = ChartFactory.createBarChart("Vente pour chaque Session", "session", 
-                  "Nombre de place vendue", dataset, PlotOrientation.VERTICAL, true, true, false); 
-                ChartFrame frame =new ChartFrame("Bar Chart for the number of tickets sold by session",barChart) ;  
-                frame.setVisible(true) ; 
-                frame.setSize(400, 400);
-                frame.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE); 
-            }catch (SQLException ex) {
-                Logger.getLogger(GUIchangeRoom.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
