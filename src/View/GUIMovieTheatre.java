@@ -18,8 +18,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -109,11 +107,11 @@ public class GUIMovieTheatre extends JFrame {
             back.addActionListener(new MovieTheatre(this));
             panel.add(basket).setBounds(950, 20, 500, 20);
             
-            panel.add(CP).setBounds(440, 200, 400, 400);
+            panel.add(CP).setBounds(410, 230, 400, 400);
             CP.setVisible(false);
             panel.add(purchase).setBounds(570, 80, 140, 20);
             purchase.setVisible(false);
-            panel.add(shopping).setBounds(390, 150, 500, 30);
+            panel.add(shopping).setBounds(370, 150, 500, 30);
             shopping.setVisible(false);
             panel.add(back).setBounds(570, 700, 80, 20);
             back.setVisible(false);

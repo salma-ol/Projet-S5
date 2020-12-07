@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package View;
+package Controller;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -55,14 +55,14 @@ public class MailIo {
 
         BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-<<<<<<< Updated upstream:src/View/MailIo.java
+//<<<<<<< Updated upstream:src/View/MailIo.java
         template.setFontAndSize(bf, 9);
         template.setTextMatrix(220, 500);
         template.showText("Summary of your order : ");
         template.setTextMatrix(220, 320);
         template.showText(number_place + " tickets for " + movie);
         template.setTextMatrix(220, 310);
-=======
+//=======
         template.setFontAndSize(bf, 23);
         template.setTextMatrix(250, 80);
         template.showText(movie);
@@ -70,7 +70,7 @@ public class MailIo {
         template.setTextMatrix(8, 30);
         template.showText(number_place + " tickets");
         template.setTextMatrix(8, 20);
->>>>>>> Stashed changes:src/Controller/MailIo.java
+//>>>>>>> Stashed changes:src/Controller/MailIo.java
         template.showText("Final price : " + price * number_place + "€");
         template.setTextMatrix(220, 300);
         template.showText("Projection Room : " + room + " , the " + date);

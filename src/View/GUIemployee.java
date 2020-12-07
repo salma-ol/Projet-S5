@@ -29,7 +29,7 @@ public class GUIemployee extends JFrame {
 
     private void build() throws ClassNotFoundException, SQLException {
         setTitle("Employee Interface");
-        setSize(500, 500);
+        setSize(470, 470);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -48,15 +48,15 @@ public class GUIemployee extends JFrame {
         buttonGroup.add(changeRoom);
         buttonGroup.add(checkData);
 
-        panel.add(addRemoveMovies).setBounds(174, 50, 145, 20);
-        panel.add(addRemoveSessions).setBounds(172, 130, 155, 20);
-        panel.add(changeRoom).setBounds(130, 210, 240, 20);
-        panel.add(checkData).setBounds(165, 290, 170, 20);
+        panel.add(addRemoveMovies).setBounds(159, 55, 145, 20);
+        panel.add(addRemoveSessions).setBounds(156, 125, 155, 20);
+        panel.add(changeRoom).setBounds(115, 195, 240, 20);
+        panel.add(checkData).setBounds(150, 265, 170, 20);
 
         confirm.addActionListener(new EmployeeController(this));
         cancel.addActionListener(new EmployeeController(this));
 
-        panel.add(confirm).setBounds(200, 400, 100, 20);
+        panel.add(confirm).setBounds(185, 360, 100, 20);
 
         return panel;
     }

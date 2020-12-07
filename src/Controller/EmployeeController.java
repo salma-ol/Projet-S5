@@ -57,6 +57,5 @@ public class EmployeeController implements ActionListener{
                 Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-    }
-    
+    } 
 }

@@ -10,14 +10,17 @@ import Modele.Database;
 import Modele.Movie;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.util.* ;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.* ;
-import org.jfree.chart.* ;
+import java.util.ArrayList;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
@@ -32,13 +35,14 @@ public class GUICheckData extends JDialog{
     private final JPanel panel = new JPanel(null);
     private final JPanel panelChart = new JPanel(null);
     private final JButton movieTicket = new JButton("Sales for all Movies");
+    private final JButton cancel = new JButton("CANCEL");
     
     private final JComboBox<String> customers = new JComboBox<>();
     private final JComboBox<String> movies = new JComboBox<>();
     private final JComboBox<String> movies2 = new JComboBox<>();
     
     private JLabel message ;
-    private ChartPanel CP = new ChartPanel(null);
+    private final ChartPanel CP = new ChartPanel(null);
 
     public GUICheckData(JFrame frame, boolean modal) throws ClassNotFoundException, SQLException
     {
@@ -78,6 +82,7 @@ public class GUICheckData extends JDialog{
         customers.addItemListener(new CheckData(this));
         movies.addItemListener(new CheckData(this));
         movies2.addItemListener(new CheckData(this));
+        cancel.addActionListener(new CheckData(this));
         
         message = new JLabel("Sales per Movie for customer X Chart") ;
         panel.add(message).setBounds(100, 20, 250, 20);
@@ -91,7 +96,9 @@ public class GUICheckData extends JDialog{
         panel.add(message).setBounds(500, 20, 250, 20);
         panel.add(movies2).setBounds(525, 50, 150, 20);
         
-        panel.add(movieTicket).setBounds(525, 120, 150, 20);
+        panel.add(movieTicket).setBounds(525, 100, 150, 20);
+        
+        panel.add(cancel).setBounds(560, 150, 80, 20);
     }
     
     public ChartPanel chart(DefaultCategoryDataset dataset, String title, String legend, String xLegend) throws SQLException {
@@ -101,6 +108,7 @@ public class GUICheckData extends JDialog{
                
             CP.setChart(barChart);
         return new ChartPanel(barChart) { // this is the trick to manage setting the size of a chart into a panel!
+            @Override
             public Dimension getPreferredSize() {
                 return new Dimension(400, 400) ;
             }
@@ -113,6 +121,7 @@ public class GUICheckData extends JDialog{
                 //ChartFrame frame =new ChartFrame("Bar Chart for the number of tickets sold by session",barChart) ; 
             CP.setChart(pieChart);
         return new ChartPanel(pieChart) { // this is the trick to manage setting the size of a chart into a panel!
+            @Override
             public Dimension getPreferredSize() {
                 return new Dimension(400, 400) ;
             }
@@ -159,6 +168,8 @@ public class GUICheckData extends JDialog{
         return CP;
     }
     
-    
+    public JButton getCancel() {
+        return cancel;
+    }
 }
 

@@ -6,8 +6,6 @@
 package Controller;
 
 import View.GUICheckData;
-import java.awt.Color;
-import java.awt.Label;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -64,9 +62,9 @@ public class CheckData implements ActionListener, ItemListener {
             DefaultCategoryDataset dataset = new DefaultCategoryDataset();
             try {
                 salesPerSessions = check.getMysql().getSalesOfaMovie(check.getMoviesList().get(check.getMovies().getSelectedIndex()).getID());
-                for (int i = 0; i < salesPerSessions.length; i++) {
-                    for (int j = 0; j < salesPerSessions[i].length; j++) {
-                        dataset.addValue(salesPerSessions[i][j], Integer.toString(salesPerSessions[i][0]), " ");
+                for (int[] salesPerSession : salesPerSessions) {
+                    for (int j = 0; j < salesPerSession.length; j++) {
+                        dataset.addValue(salesPerSession[j], Integer.toString(salesPerSession[0]), " ");
                     }
                 }
             } catch (SQLException ex) {
@@ -88,21 +86,21 @@ public class CheckData implements ActionListener, ItemListener {
             check.getPanelChart().updateUI();
 
             int allTickets = 0;
-            int guestTickets = 0;
+            int guestTickets;
             int[][] salesPerSession;
             DefaultPieDataset dataset = new DefaultPieDataset();
 
             try {
                 salesPerSession = check.getMysql().getSalesOfaMovie(check.getMoviesList().get(check.getMovies2().getSelectedIndex()).getID());
-                for (int i = 0; i < salesPerSession.length; i++) {
-                    for (int j = 0; j < salesPerSession[i].length; j++) {
-                        allTickets += salesPerSession[i][j];
+                for (int[] salesPerSession1 : salesPerSession) {
+                    for (int j = 0; j < salesPerSession1.length; j++) {
+                        allTickets += salesPerSession1[j];
                     }
                 }
-                
+
                 guestTickets = check.getMysql().getSalesOfaMovieByCustomer(check.getMoviesList().get(check.getMovies2().getSelectedIndex()).getID(), "Guest");
-                dataset.setValue("Members " + (int)(((allTickets - guestTickets)/(double)allTickets)*100)+"%", allTickets - guestTickets);
-                dataset.setValue("Guests " + (int)(((guestTickets)/(double)allTickets)*100) +"%", guestTickets);
+                dataset.setValue("Members " + (int) (((allTickets - guestTickets) / (double) allTickets) * 100) + "%", allTickets - guestTickets);
+                dataset.setValue("Guests " + (int) (((guestTickets) / (double) allTickets) * 100) + "%", guestTickets);
             } catch (SQLException ex) {
                 Logger.getLogger(GUICheckData.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -113,7 +111,7 @@ public class CheckData implements ActionListener, ItemListener {
             } catch (SQLException ex) {
                 Logger.getLogger(GUICheckData.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
+
             check.getPanelChart().validate();
 
         }
@@ -121,7 +119,9 @@ public class CheckData implements ActionListener, ItemListener {
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-        if (ae.getSource() == check.getMovieTicket()) {
+        if (ae.getSource() == check.getCancel()) {
+            check.dispose();
+        } else if (ae.getSource() == check.getMovieTicket()) {
             check.getPanelChart().removeAll();
             check.getPanelChart().updateUI();
             int[][] salesPerSession;
@@ -132,9 +132,9 @@ public class CheckData implements ActionListener, ItemListener {
                     salesPerSession = check.getMysql().getSalesOfaMovie(check.getMoviesList().get(n).getID());
 
                     int numbTickets = 0;
-                    for (int i = 0; i < salesPerSession.length; i++) {
-                        for (int j = 0; j < salesPerSession[i].length; j++) {
-                            numbTickets += salesPerSession[i][j];
+                    for (int[] salesPerSession1 : salesPerSession) {
+                        for (int j = 0; j < salesPerSession1.length; j++) {
+                            numbTickets += salesPerSession1[j];
                         }
                     }
                     dataset.addValue(numbTickets, check.getMoviesList().get(n).getName(), " ");
@@ -153,5 +153,4 @@ public class CheckData implements ActionListener, ItemListener {
             check.getPanelChart().validate();
         }
     }
-
 }
