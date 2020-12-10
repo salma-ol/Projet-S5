@@ -43,7 +43,7 @@ public class GUIaddRemoveSessions extends JDialog{
 
     private void build() throws ClassNotFoundException, SQLException {
         setTitle("Add/Remove Sessions");
-        setSize(1500, 800);
+        setSize(1100, 800);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -55,7 +55,7 @@ public class GUIaddRemoveSessions extends JDialog{
 
     private JPanel buildContentPane() throws ClassNotFoundException, SQLException {
         panel.setLayout(null);
-        panel.setBackground(Color.orange);
+        panel.setBackground(new Color(235, 220, 240));
 
         addSessions.addActionListener(new AddRemoveSession(this));
         removeSessions.addActionListener(new AddRemoveSession(this));
@@ -69,20 +69,24 @@ public class GUIaddRemoveSessions extends JDialog{
             if (i != 0) {
                 y = 60 + 140 * i;
             }
-            panel.add(new JLabel(moviesList.get(i).getName())).setBounds(60, y, 200, 20);
+            
+            JLabel msg = new JLabel(moviesList.get(i).getName());
+            msg.setFont(new java.awt.Font("Times New Roman", 3, 15));
+            panel.add(msg).setBounds(60, y, 200, 20);
             for (int j = 0; j < sessionsList.size(); j++) {
                 allSessionsList.add(sessionsList.get(j));
                 sessionsCheckBox.add(new JCheckBox(sessionsList.get(j).getDate().toString()));
                 panel.add(sessionsCheckBox.get(j + size)).setBounds(60 + 200 + 200 * (j / 2), y + 60 * (j % 2), 150, 20);
+                sessionsCheckBox.get(j + size).setBackground(new Color(235, 220, 240));
             }
             size += sessionsList.size();
         }
 
-        panel.add(addSessions).setBounds(1200, 350, 150, 20);
-        panel.add(removeSessions).setBounds(1200, 450, 150, 20);
-        panel.add(cancel).setBounds(1225, 400, 100, 20);
+        panel.add(addSessions).setBounds(900, 350, 150, 20);
+        panel.add(removeSessions).setBounds(900, 450, 150, 20);
+        panel.add(cancel).setBounds(950, 400, 100, 20);
 
-        panel.add(errorModification).setBounds(1000, 600, 400, 20);
+        panel.add(errorModification).setBounds(700, 600, 400, 20);
 
         return panel;
     }

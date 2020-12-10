@@ -5,80 +5,74 @@
  */
 package Controller;
 
+import com.barcode_coder.java_barcode.Barcode;
+import com.barcode_coder.java_barcode.BarcodeFactory;
+import com.barcode_coder.java_barcode.BarcodeType;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Rectangle;
 import java.io.IOException;
 import java.util.Properties;
-import java.util.logging.*;
-import javax.mail.*;
-import javax.mail.internet.*;
-import com.barcode_coder.java_barcode.*;
-import com.itextpdf.text.*;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfTemplate;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.sql.Timestamp;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
 
 public class MailIo {
 
     private final String username = "UGCECE@gmail.com";
     private final String password = "ProjetInfo";
-    private final int i = 0;
+    private int i = 0;
 
     public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
         Image png = Image.getInstance("pdf.png");
-        Image jpeg = Image.getInstance("./Movies/" + movie + ".jpg");
         Image jpg = Image.getInstance(barcode);
 
-        png.setAbsolutePosition(100f, 200f);
-        jpg.setAbsolutePosition(240f, 620f);
-        jpeg.setAbsolutePosition(250f, 435f);
+        png.setAbsolutePosition(0f, 0f);
+        jpg.setAbsolutePosition(250f, 5f);
 
         jpg.scaleToFit(jpg.getWidth() / 2, jpg.getHeight() / 2);
-        jpeg.scaleToFit(jpeg.getWidth() / 3, jpeg.getHeight() / 3);
 
         Document document = new Document();
+        document.setPageSize(new Rectangle(0,0, png.getWidth(), png.getHeight()));
 
         PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
         document.open();
+        document.setPageSize(new Rectangle(0,0,png.getWidth()/2, png.getHeight()/2));
 
         PdfContentByte contentByte = writer.getDirectContent();
         PdfTemplate template = contentByte.createTemplate(document.getPageSize().getWidth(), document.getPageSize().getHeight());
 
         template.beginText();
 
-        BaseFont bf = BaseFont.createFont(BaseFont.HELVETICA, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
+        BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-//<<<<<<< Updated upstream:src/View/MailIo.java
-        template.setFontAndSize(bf, 9);
-        template.setTextMatrix(220, 500);
-        template.showText("Summary of your order : ");
-        template.setTextMatrix(220, 320);
-        template.showText(number_place + " tickets for " + movie);
-        template.setTextMatrix(220, 310);
-//=======
         template.setFontAndSize(bf, 23);
-        template.setTextMatrix(250, 80);
+        template.setTextMatrix(215, 80);
         template.showText(movie);
         template.setFontAndSize(bf, 12);
         template.setTextMatrix(8, 30);
         template.showText(number_place + " tickets");
         template.setTextMatrix(8, 20);
-//>>>>>>> Stashed changes:src/Controller/MailIo.java
         template.showText("Final price : " + price * number_place + "€");
-        template.setTextMatrix(220, 300);
-        template.showText("Projection Room : " + room + " , the " + date);
+        template.setTextMatrix(8, 10);
+        template.showText("Projection Room : " + room);
+        template.setTextMatrix(8, 0);
+        template.showText("" + date);
         template.endText();
         contentByte.addTemplate(template, 10, 100);
 
         document.add(png);
-        document.add(jpeg);
         document.add(jpg);
 
         document.close();
@@ -98,7 +92,6 @@ public class MailIo {
 
         // Etape 1 : Création de la session
         String Newligne = System.getProperty("line.separator");
-        
 
         Properties props = new Properties();
         props.put("mail.smtp.auth", "true");
@@ -153,8 +146,9 @@ public class MailIo {
      * @param room
      * @param price
      * @throws DocumentException
+     * @throws javax.mail.MessagingException
      */
-    public void envoyer_reservation(String email, String id, String file_movie, Timestamp date, int place, int room, float price) throws DocumentException {
+    public void envoyer_reservation(String email, String id, String file_movie, Timestamp date, int place, int room, float price) throws DocumentException, MessagingException {
 
         // Etape 1 : Création de la session
         String Newligne = System.getProperty("line.separator");
@@ -180,7 +174,7 @@ public class MailIo {
             message.setFrom(new InternetAddress("UGCECE@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
-            message.setSubject("Here are your tickets");
+            message.setSubject("Your Reservation");
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
@@ -196,7 +190,7 @@ public class MailIo {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             generer("./Barcode/barcode_"+id+"_"+i+".png", file_movie, outputStream, date, place, room, price);
             byte[] bytes = outputStream.toByteArray();
-
+                
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
             MimeBodyPart pdfBodyPart = new MimeBodyPart();
             pdfBodyPart.setDataHandler(new DataHandler(dataSource));
@@ -214,5 +208,6 @@ public class MailIo {
         } catch (IOException ex) {
             Logger.getLogger(MailIo.class.getName()).log(Level.SEVERE, null, ex);
         }
+        i++;
     }
 }

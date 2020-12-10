@@ -72,7 +72,7 @@ public class GUIpayment extends JDialog{
 
     private JPanel buildContentPane() {
         panel.setLayout(null);
-        panel.setBackground(Color.pink);
+        panel.setBackground(new Color(207, 207, 207));
 
         buttonGroup.add(visa);
         buttonGroup.add(mastercard);

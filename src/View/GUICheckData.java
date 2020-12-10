@@ -51,15 +51,16 @@ public class GUICheckData extends JDialog{
     }
     private void build() throws ClassNotFoundException, SQLException {
         setTitle("Check Data");
-        setSize(800, 700);
+        setSize(950, 500);
         setLocationRelativeTo(null);
         setResizable(false);
-        panelChart.setBackground(Color.orange);
-        panel.setBackground(Color.orange);
+        
+        panelChart.setBackground(new Color(235, 220, 240));
+        panel.setBackground(new Color(235, 220, 240));
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         setLayout(null);
         
-        panelChart.setBounds(0,200,800,500) ;
+        panelChart.setBounds(300,0,700,600) ;
         buildContentPane() ; 
         add(panel) ; 
         add(panelChart) ; 
@@ -68,7 +69,7 @@ public class GUICheckData extends JDialog{
     }
 
     private void buildContentPane() throws ClassNotFoundException, SQLException {
-        panel.setBounds(0,0,800,200);
+        panel.setBounds(0,0,350,600);
         
         for (String customer : customersList) {
             customers.addItem(customer);
@@ -85,20 +86,25 @@ public class GUICheckData extends JDialog{
         cancel.addActionListener(new CheckData(this));
         
         message = new JLabel("Sales per Movie for customer X Chart") ;
-        panel.add(message).setBounds(100, 20, 250, 20);
-        panel.add(customers).setBounds(155, 50, 100, 20);
+        message.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(message).setBounds(20, 20, 250, 20);
+        panel.add(customers).setBounds(25, 50, 100, 20);
         
         message = new JLabel("Sales per Session for movie X Chart") ;
-        panel.add(message).setBounds(100, 90, 250, 20);
-        panel.add(movies).setBounds(140, 120, 130, 20);
+        message.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(message).setBounds(20, 100, 250, 20);
+        panel.add(movies).setBounds(25, 130, 130, 20);
         
         message = new JLabel("Buyers statistics for movie X Chart") ;
-        panel.add(message).setBounds(500, 20, 250, 20);
-        panel.add(movies2).setBounds(525, 50, 150, 20);
+        message.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(message).setBounds(20, 200, 250, 20);
+        panel.add(movies2).setBounds(25, 230, 150, 20);
         
-        panel.add(movieTicket).setBounds(525, 100, 150, 20);
+        movieTicket.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(movieTicket).setBounds(20, 300, 200, 20);
         
-        panel.add(cancel).setBounds(560, 150, 80, 20);
+        cancel.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(cancel).setBounds(200, 400, 100, 20);
     }
     
     public ChartPanel chart(DefaultCategoryDataset dataset, String title, String legend, String xLegend) throws SQLException {

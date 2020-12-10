@@ -11,6 +11,7 @@ import DateCalendar.DateLabelFormatter;
 import java.awt.Color;
 import java.util.Calendar;
 import java.util.Properties;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -37,6 +38,7 @@ public class GUIsignup extends JDialog{
     private final JPanel panel = new JPanel();
 
     private final JLabel registrationFailed = new JLabel();
+    private final JLabel accueil = new JLabel("Here is the beginning of the end");
 
     private final JTextField id = new JTextField(25);
     private final JTextField email = new JTextField(25);
@@ -52,7 +54,7 @@ public class GUIsignup extends JDialog{
 
     private void build() {
         setTitle("Sign up");
-        setSize(500, 710);
+        setSize(900, 500);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -63,31 +65,70 @@ public class GUIsignup extends JDialog{
     }
 
     private JPanel buildContentPane() {
+        
+        JLabel clap = new JLabel("Confirm");
+        clap.setIcon(new ImageIcon("clap.png"));
+        clap.setOpaque(true);
+        
+        JLabel look2 = new JLabel(new ImageIcon("bande.png"));
+        look2.setOpaque(true);
         panel.setLayout(null);
-        panel.setBackground(Color.blue);
+        panel.setBackground(Color.white);
 
         calendar();
-
-        panel.add(new JLabel("Username :")).setBounds(77, 60, 80, 20);
-        panel.add(id).setBounds(210, 60, 200, 20);
-        panel.add(new JLabel("Password :")).setBounds(77, 125, 80, 20);
-        panel.add(password).setBounds(210, 125, 200, 20);
-        panel.add(new JLabel("Verify Password :")).setBounds(60, 190, 200, 20);
-        panel.add(verifyPassword).setBounds(208, 190, 200, 20);
-        panel.add(new JLabel("Email :")).setBounds(88, 255, 80, 20);
-        panel.add(email).setBounds(212, 255, 200, 20);
-        panel.add(new JLabel("Firstname :")).setBounds(76, 320, 80, 20);
-        panel.add(firstname).setBounds(210, 320, 200, 20);
-        panel.add(new JLabel("Lastname :")).setBounds(76, 385, 80, 20);
-        panel.add(lastname).setBounds(210, 385, 200, 20);
-        panel.add(new JLabel("Birthday :")).setBounds(80, 450, 80, 20);
-        panel.add(birthday).setBounds(211, 450, 200, 20);
+        JLabel text;
+        
+        panel.add(accueil).setBounds(100, 10, 500, 40);
+        accueil.setFont(new java.awt.Font("Times New Roman", 3, 35));
+        
+        panel.add(look2).setBounds(650, 0, 220, 500);
+        
+        text = new JLabel("Username :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(30, 100, 80, 20);
+        panel.add(id).setBounds(30, 120, 200, 20);
+        
+        text = new JLabel("Firstname :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(260, 100, 80, 20);
+        panel.add(firstname).setBounds(260, 120, 200, 20);
+        
+        text = new JLabel("Lastname :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(500, 100, 80, 20);
+        panel.add(lastname).setBounds(500, 120, 200, 20);
+        
+        text = new JLabel("Email :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(260, 170, 80, 20);
+        panel.add(email).setBounds(260, 190, 200, 20);
+        
+        text = new JLabel("Password :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(500, 170, 80, 20);
+        panel.add(password).setBounds(500, 190, 200, 20);
+        
+        text = new JLabel("Verify Password :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(500, 250, 200, 20);
+        panel.add(verifyPassword).setBounds(500, 270, 200, 20);
+        
+        text = new JLabel("Birthday :");
+        text.setFont(new java.awt.Font("Times New Roman", 3, 15));
+        panel.add(text).setBounds(30, 170, 80, 20);
+        panel.add(birthday).setBounds(30, 190, 200, 20);
 
         confirm.addActionListener(new Signup(this));
         cancel.addActionListener(new Signup(this));
 
-        panel.add(confirm).setBounds(125, 525, 100, 20);
-        panel.add(cancel).setBounds(265, 525, 100, 20);
+        panel.add(confirm).setBounds(41, 385, 160, 20);
+        confirm.setBackground(Color.BLACK);
+        confirm.setBorder(null);
+        confirm.setForeground(Color.white);
+        confirm.setFont(new java.awt.Font("Times New Roman", 3, 30));
+        
+        panel.add(clap).setBounds(30, 250, 185, 180);
+        panel.add(cancel).setBounds(500, 400, 100, 20);
         panel.add(registrationFailed).setBounds(165, 595, 200, 20);
 
         return panel;

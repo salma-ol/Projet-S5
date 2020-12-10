@@ -18,6 +18,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -48,7 +49,7 @@ public class GUIMovieTheatre extends JFrame {
 
     private ChartPanel CP = new ChartPanel(null);
 
-    private JLabel movie;
+    private JLabel movie = new JLabel();
     private final JLabel name = new JLabel();
     private final JLabel director = new JLabel();
     private final JLabel genre = new JLabel();
@@ -57,14 +58,26 @@ public class GUIMovieTheatre extends JFrame {
     private final JLabel ticketError = new JLabel();
     private final JLabel basket = new JLabel(new ImageIcon("panier.png"));
     private final JLabel purchase = new JLabel("COMMAND LIST:");
+    
+    private JLabel text = new JLabel();
 
     private final JTextField numberOfTickets = new JTextField(10);
+    private final JLabel background = new JLabel(new ImageIcon("rideau.png"));
 
     private final JButton next = new JButton("NEXT");
     private final JButton previous = new JButton("PREVIOUS");
     private final JButton buyTickets = new JButton("BUY TICKETS");
     private final JButton back = new JButton("BACK");
     private final JButton home = new JButton("Home Page");
+    
+    private final Icon imageIcon = new ImageIcon(this.getClass().getResource("confetti.gif"));
+    private final JLabel git = new JLabel(imageIcon);
+    
+    private final Icon imageIcon2 = new ImageIcon(this.getClass().getResource("confetti.gif"));
+    private final JLabel git2 = new JLabel(imageIcon2);
+    
+    private final Icon imageIcon3 = new ImageIcon(this.getClass().getResource("popcorn.gif"));
+    private final JLabel git3 = new JLabel(imageIcon3);
 
     private JComboBox shopping;
 
@@ -72,11 +85,11 @@ public class GUIMovieTheatre extends JFrame {
 
     private void build() throws ClassNotFoundException, SQLException, Throwable {
         setTitle("Welcome to my movie theatre");
-        setSize(1250, 800);
+        setSize(1200, 750);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        
         setContentPane(buildContentPane());
 
         setVisible(true);
@@ -84,12 +97,18 @@ public class GUIMovieTheatre extends JFrame {
 
     private JPanel buildContentPane() throws ClassNotFoundException, SQLException, Throwable {
         panel.setLayout(null);
-        panel.setBackground(Color.yellow);
+        panel.setBackground(new Color(208, 203, 203));
+        purchase.setForeground(Color.white);
+        purchase.setFont(new java.awt.Font("Times New Roman", 3, 20));
 
         if (customer == null) {
-            panel.add(new JLabel("WELCOME TO YOU  !")).setBounds(880, 70, 200, 20);
+            text = new JLabel("WELCOME TO YOU  !");
+            panel.add(text).setBounds(450, 130, 350, 20);
+            text.setFont(new java.awt.Font("Times New Roman", 3, 30));
         } else {
-            panel.add(new JLabel("WELCOME BACK  " + customer.getID().toUpperCase() + " !")).setBounds(855, 70, 200, 20);
+            text = new JLabel("WELCOME BACK  " + customer.getID().toUpperCase() + " !");
+            panel.add(text).setBounds(405, 130, 400, 20);
+            text.setFont(new java.awt.Font("Times New Roman", 3, 30));
             shopping = new JComboBox<>(mysql.getSales(customer.getID()).toArray());
             CP = chart();
             basket.addMouseListener(new MouseAdapter() {
@@ -98,22 +117,29 @@ public class GUIMovieTheatre extends JFrame {
                     for (Component component : panel.getComponents()) {
                         component.setVisible(false);
                     }
+                    panel.setBackground(Color.black);
                     purchase.setVisible(true);
                     shopping.setVisible(true);
                     back.setVisible(true);
                     CP.setVisible(true);
+                    git.setVisible(true);
+                    git2.setVisible(true);
                 }
             });
-            back.addActionListener(new MovieTheatre(this));
-            panel.add(basket).setBounds(950, 20, 500, 20);
             
-            panel.add(CP).setBounds(410, 230, 400, 400);
+            back.addActionListener(new MovieTheatre(this));
+            panel.add(basket).setBounds(590, 110, 500, 20);
+            panel.add(git).setBounds(10, 10, 400, 400);
+            git.setVisible(false);
+            panel.add(git2).setBounds(780, 10, 400, 400);
+            git2.setVisible(false);
+            panel.add(CP).setBounds(410, 130, 400, 400);
             CP.setVisible(false);
-            panel.add(purchase).setBounds(570, 80, 140, 20);
+            panel.add(purchase).setBounds(540, 20, 300, 20);
             purchase.setVisible(false);
-            panel.add(shopping).setBounds(370, 150, 500, 30);
+            panel.add(shopping).setBounds(370, 70, 500, 30);
             shopping.setVisible(false);
-            panel.add(back).setBounds(570, 700, 80, 20);
+            panel.add(back).setBounds(570, 550, 80, 20);
             back.setVisible(false);
         }
 
@@ -123,34 +149,45 @@ public class GUIMovieTheatre extends JFrame {
         previous.addActionListener(new MovieTheatre(this));
         next.addActionListener(new MovieTheatre(this));
 
-        panel.add(previous).setBounds(80, 265, 100, 20);
-        panel.add(next).setBounds(580, 265, 100, 20);
+        panel.add(previous).setBounds(360, 365, 100, 20);
+        panel.add(next).setBounds(720, 365, 100, 20);
 
-        panel.add(name).setBounds(210, 555, 200, 20);
-        panel.add(director).setBounds(210, 595, 200, 20);
-        panel.add(genre).setBounds(210, 635, 500, 20);
-        panel.add(time).setBounds(210, 675, 200, 20);
+        panel.add(name).setBounds(720, 440, 200, 20);
+        panel.add(director).setBounds(720, 460, 200, 20);
+        panel.add(genre).setBounds(720, 480, 500, 20);
+        panel.add(time).setBounds(720, 500, 200, 20);
 
         buyTickets.addActionListener(new MovieTheatre(this));
         home.addActionListener(new MovieTheatre(this));
 
-        panel.add(new JLabel("Number of tickets:")).setBounds(860, 480, 200, 20);
-        panel.add(numberOfTickets).setBounds(985, 480, 50, 20);
-        panel.add(buyTickets).setBounds(870, 530, 150, 20);
-        panel.add(home).setBounds(870, 700, 150, 20);
+        JLabel nb = new JLabel("Number of tickets");
+        panel.add(nb).setBounds(640, 600, 200, 20);
+        nb.setFont(new java.awt.Font("Times New Roman", 3, 20));
+        panel.add(numberOfTickets).setBounds(660, 630, 50, 20);
+        panel.add(buyTickets).setBounds(540, 680, 150, 20);
+        panel.add(home).setBounds(870, 680, 150, 20);
 
-        panel.add(ticketError).setBounds(845, 630, 240, 20);
+        panel.add(ticketError).setBounds(530, 657, 240, 20);
 
         nextMovie();
+        panel.add(movie).setBounds(480, 135, 500, 500);
 
         remainingTickets.setText(mysql.getNumberTickets(sessionsList.get(sessionsDate.getSelectedIndex()).getRoom(), sessionsList.get(sessionsDate.getSelectedIndex()).getID()) + " Tickets remaining !");
 
         sessionsDate.addItemListener(new MovieTheatre(this));
-        panel.add(new JLabel("Choose a movie session :")).setBounds(785, 200, 200, 20);
-        panel.add(sessionsDate).setBounds(955, 200, 150, 20);
+        JLabel ticket = new JLabel("Choose a movie session");
+        ticket.setFont(new java.awt.Font("Times New Roman", 3, 20));
+        panel.add(ticket).setBounds(390, 600, 200, 20);
+        panel.add(sessionsDate).setBounds(405, 630, 150, 20);
 
-        panel.add(remainingTickets).setBounds(880, 250, 300, 20);
-        panel.add(new JLabel("TICKETING :")).setBounds(915, 430, 200, 20);
+        panel.add(remainingTickets).setBounds(505, 180, 300, 20);
+        remainingTickets.setFont(new java.awt.Font("Times New Roman", 3, 20));
+        JLabel ticketing = new JLabel("TICKETING :");
+        ticketing.setFont(new java.awt.Font("Times New Roman", 3, 20));
+        panel.add(ticketing).setBounds(555, 570, 200, 20);
+        panel.add(git3).setBounds(200, 450, 200, 200);
+        panel.add(background).setBounds(0, 0, 1200, 700);
+        
 
         return panel;
     }
@@ -177,14 +214,10 @@ public class GUIMovieTheatre extends JFrame {
         time.setText("Time:  " + moviesList.get(movieNumber).getTime().toString());
         ticketError.setText("");
 
-        if (movie != null) {
-            panel.remove(movie);
-        }
-
         sessionsList = mysql.getSessions(moviesList.get(movieNumber).getID());
 
-        movie = new JLabel(new ImageIcon("./Movies/" + moviesList.get(movieNumber).getName() + ".jpg"));
-        panel.add(movie).setBounds(130, 35, 500, 500);
+        movie.setIcon(new ImageIcon("./Movies/" + moviesList.get(movieNumber).getName() + ".jpg"));
+        
 
         sessionsDate.removeAllItems();
         for (Session hours : sessionsList) {
@@ -283,5 +316,12 @@ public class GUIMovieTheatre extends JFrame {
     public ChartPanel getCP() {
         return CP;
     }
+    
+    public JLabel getGit() {
+        return git;
+    }
 
+    public JLabel getGit2() {
+        return git2;
+    }
 }

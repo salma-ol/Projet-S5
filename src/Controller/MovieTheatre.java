@@ -10,6 +10,7 @@ import View.GUIpayment;
 import Modele.Movie;
 import View.GUIMovieTheatre;
 import com.itextpdf.text.DocumentException;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -94,7 +95,10 @@ public class MovieTheatre implements ActionListener, ItemListener {
             theatre.getPurchase().setVisible(false);
             theatre.getShopping().setVisible(false);
             theatre.getBack().setVisible(false);
-            theatre.getCP().setVisible(false) ; 
+            theatre.getCP().setVisible(false); 
+            theatre.getGit().setVisible(false);
+            theatre.getGit2().setVisible(false);
+            theatre.getPanel().setBackground(new Color(208, 203, 203));
         } else {
             theatre.getTicketError().setText("Please enter a number of tickets !");
         }
