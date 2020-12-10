@@ -27,6 +27,7 @@ public class Login implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        
         if (event.getSource() == log.getCancel()) {
             log.dispose();
         } else if (event.getSource() == log.getConfirm() && log.getId().getText().length() != 0 && log.getPassword().getPassword().length != 0) {

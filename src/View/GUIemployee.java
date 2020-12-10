@@ -27,9 +27,9 @@ public class GUIemployee extends JFrame {
     private final JRadioButton checkData = new JRadioButton("Check the DataBase Data");
 
     private final JButton confirm = new JButton("CONFIRM");
-    private final JButton cancel = new JButton("CANCEL");
+    private final JButton quit = new JButton("QUIT THE PAGE");
     
-     private JLabel choice = new JLabel("Make your Choice");
+     private final JLabel choice = new JLabel("Make your Choice");
 
     private void build() throws ClassNotFoundException, SQLException {
         setTitle("Employee Interface");
@@ -76,9 +76,10 @@ public class GUIemployee extends JFrame {
         panel.add(checkData).setBounds(150, 240, 170, 20);
 
         confirm.addActionListener(new EmployeeController(this));
-        cancel.addActionListener(new EmployeeController(this));
+        quit.addActionListener(new EmployeeController(this));
 
-        panel.add(confirm).setBounds(185, 320, 100, 20);
+        panel.add(confirm).setBounds(185, 300, 100, 20);
+        panel.add(quit).setBounds(155, 350, 150, 20);
 
         return panel;
     }
@@ -117,6 +118,6 @@ public class GUIemployee extends JFrame {
     }
 
     public JButton getCancel() {
-        return cancel;
+        return quit;
     } 
 }

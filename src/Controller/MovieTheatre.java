@@ -80,7 +80,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
                             if (movies.getID() == theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getIDMovie()) {
                                 try {
                                     pdf.envoyer_reservation(payment.getEmail(), payment.getId(), movies.getName(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getDate(), Integer.parseInt(theatre.getNumberOfTickets().getText()), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getRoom(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getPrice());
-                                } catch (DocumentException ex) {
+                                } catch (DocumentException | MessagingException ex) {
                                     Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
                                 }
                             }
@@ -104,6 +104,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
         }
         if (event.getSource() == theatre.getHome()) {
             GUIhomePage home = new GUIhomePage();
+            home.setIsReturned(true);
             theatre.dispose();
         }
     }

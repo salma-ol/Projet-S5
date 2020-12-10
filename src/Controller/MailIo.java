@@ -48,7 +48,7 @@ public class MailIo {
         PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
         document.open();
-        document.setPageSize(new Rectangle(0,0,png.getWidth()/2, png.getHeight()/2));
+        document.setPageSize(new Rectangle(0,0,png.getWidth(), png.getHeight()));
 
         PdfContentByte contentByte = writer.getDirectContent();
         PdfTemplate template = contentByte.createTemplate(document.getPageSize().getWidth(), document.getPageSize().getHeight());
@@ -58,7 +58,7 @@ public class MailIo {
         BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
         template.setFontAndSize(bf, 23);
-        template.setTextMatrix(215, 80);
+        template.setTextMatrix(210, 80);
         template.showText(movie);
         template.setFontAndSize(bf, 12);
         template.setTextMatrix(8, 30);

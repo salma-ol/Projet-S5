@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class HomePage implements ActionListener{
     
     private final GUIhomePage home;
+    private boolean verification = false;
     
     public HomePage(GUIhomePage home){
         this.home = home;
@@ -31,6 +32,12 @@ public class HomePage implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        if(home.isIsReturned()) {
+            home.setUser(null);
+            verification = true;
+        }
+        home.setIsReturned(false);
+        
         if ((home.getMember().isSelected() || home.getEmployee().isSelected()) && home.getUser() == null) {
             GUIlogin login = new GUIlogin(home, true, home.getMember().isSelected());
             home.setUser(login.getUser());
@@ -57,5 +64,6 @@ public class HomePage implements ActionListener{
             }
             home.dispose();
         }
+        verification = false;
     }
 }
