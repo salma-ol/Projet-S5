@@ -9,6 +9,7 @@ import Controller.Login;
 import Modele.User;
 import Modele.Database;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -30,7 +31,8 @@ public class GUIlogin extends JDialog{
     private final JPanel panel = new JPanel();
 
     private final JLabel errorAuthentification = new JLabel("");
-
+    private final JLabel paragraph = new JLabel("You are about to enter into a universe of choice");
+    
     private final JTextField id = new JTextField(15);
     private final JPasswordField password = new JPasswordField(10);
 
@@ -39,7 +41,7 @@ public class GUIlogin extends JDialog{
 
     private void build() {
         setTitle("Login");
-        setSize(500, 300);
+        setSize(545, 300);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -50,19 +52,31 @@ public class GUIlogin extends JDialog{
     }
 
     private JPanel buildContentPane() {
+        
+        JLabel look = new JLabel(new ImageIcon("fond_home.png"));
+        look.setOpaque(true);
+        
+        JLabel look2 = new JLabel(new ImageIcon("fond_home.png"));
+        look2.setOpaque(true);
+        
         panel.setLayout(null);
-        panel.setBackground(Color.blue);
-
-        panel.add(new JLabel("Username :")).setBounds(95, 45, 80, 20);
-        panel.add(id).setBounds(195, 45, 200, 20);
-        panel.add(new JLabel("Password :")).setBounds(95, 95, 80, 20);
-        panel.add(password).setBounds(195, 95, 200, 20);
+        panel.setBackground(new Color(221, 213, 218));
+        
+        paragraph.setFont(new java.awt.Font("Times New Roman", 3, 22));
+        
+        panel.add(look).setBounds(15, 0, 30, 300);
+        panel.add(look2).setBounds(490, 0, 30, 300);
+        panel.add(paragraph).setBounds(55, 5, 440, 40);
+        panel.add(new JLabel("Username :")).setBounds(110, 75, 80, 20);
+        panel.add(id).setBounds(210, 75, 200, 20);
+        panel.add(new JLabel("Password :")).setBounds(110, 125, 80, 20);
+        panel.add(password).setBounds(210, 125, 220, 20);
 
         confirm.addActionListener(new Login(this));
         cancel.addActionListener(new Login(this));
 
-        panel.add(confirm).setBounds(95, 150, 100, 20);
-        panel.add(cancel).setBounds(295, 150, 100, 20);
+        panel.add(confirm).setBounds(95, 180, 100, 20);
+        panel.add(cancel).setBounds(295, 180, 100, 20);
         panel.add(errorAuthentification).setBounds(135, 200, 300, 20);
         
         return panel;

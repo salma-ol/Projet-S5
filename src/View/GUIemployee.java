@@ -8,9 +8,11 @@ package View;
 import Controller.EmployeeController;
 import java.awt.Color;
 import java.sql.SQLException;
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
@@ -26,6 +28,8 @@ public class GUIemployee extends JFrame {
 
     private final JButton confirm = new JButton("CONFIRM");
     private final JButton cancel = new JButton("CANCEL");
+    
+     private JLabel choice = new JLabel("Make your Choice");
 
     private void build() throws ClassNotFoundException, SQLException {
         setTitle("Employee Interface");
@@ -41,22 +45,40 @@ public class GUIemployee extends JFrame {
 
     private JPanel buildContentPane() {
         panel.setLayout(null);
-        panel.setBackground(Color.green);
+        panel.setBackground(new Color(235, 220, 240));
 
+        addRemoveMovies.setBackground(new Color(235, 220, 240));
+        addRemoveSessions.setBackground(new Color(235, 220, 240));
+        changeRoom.setBackground(new Color(235, 220, 240));
+        checkData.setBackground(new Color(235, 220, 240));
+        
+        addRemoveMovies.setOpaque(true);
+        addRemoveSessions.setOpaque(true);
+        changeRoom.setOpaque(true);
+        checkData.setOpaque(true);
+        
         buttonGroup.add(addRemoveMovies);
         buttonGroup.add(addRemoveSessions);
         buttonGroup.add(changeRoom);
         buttonGroup.add(checkData);
+        
+        addRemoveMovies.setBorder(BorderFactory.createLineBorder(Color.black));
+        addRemoveSessions.setBorder(BorderFactory.createLineBorder(Color.black));
+        changeRoom.setBorder(BorderFactory.createLineBorder(Color.black));
+        checkData.setBorder(BorderFactory.createLineBorder(Color.black));
 
-        panel.add(addRemoveMovies).setBounds(159, 55, 145, 20);
-        panel.add(addRemoveSessions).setBounds(156, 125, 155, 20);
-        panel.add(changeRoom).setBounds(115, 195, 240, 20);
-        panel.add(checkData).setBounds(150, 265, 170, 20);
+        panel.add(choice).setBounds(110, 30, 400, 30);
+        choice.setFont(new java.awt.Font("Times New Roman", 3, 30));
+        
+        panel.add(addRemoveMovies).setBounds(159, 120, 145, 20);
+        panel.add(addRemoveSessions).setBounds(156, 160, 155, 20);
+        panel.add(changeRoom).setBounds(115, 200, 240, 20);
+        panel.add(checkData).setBounds(150, 240, 170, 20);
 
         confirm.addActionListener(new EmployeeController(this));
         cancel.addActionListener(new EmployeeController(this));
 
-        panel.add(confirm).setBounds(185, 360, 100, 20);
+        panel.add(confirm).setBounds(185, 320, 100, 20);
 
         return panel;
     }

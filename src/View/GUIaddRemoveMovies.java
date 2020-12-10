@@ -42,7 +42,7 @@ public class GUIaddRemoveMovies extends JDialog {
 
     private void build() throws ClassNotFoundException, SQLException {
         setTitle("Add/Remove Movies");
-        setSize(700, 750);
+        setSize(700, 600);
         setLocationRelativeTo(null);
         setResizable(false);
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -53,23 +53,30 @@ public class GUIaddRemoveMovies extends JDialog {
     }
 
     private JPanel buildContentPane() throws ClassNotFoundException, SQLException {
+        JLabel msg;
         panel.setLayout(null);
-        panel.setBackground(Color.orange);      
+        panel.setBackground(new Color(235, 220, 240));     
 
         addMovies.addActionListener(new AddRemoveMovies(this));
         removeMovies.addActionListener(new AddRemoveMovies(this));
         cancel.addActionListener(new AddRemoveMovies(this));
 
-        panel.add(new JLabel("Movies:")).setBounds(95, 50, 100, 20);
+        msg = new JLabel("Movies:");
+        msg.setFont(new java.awt.Font("Times New Roman", 3, 20));
+        panel.add(msg).setBounds(95, 50, 100, 20);
         for (int i = 0; i < moviesList.size(); i++) {
             moviesCheckBox.add(new JCheckBox(moviesList.get(i).getName()));
             panel.add(moviesCheckBox.get(i)).setBounds(95, 110 + 60 * i, 200, 20);
+            moviesCheckBox.get(i).setBackground(new Color(235, 220, 240));
         }
 
-        panel.add(new JLabel("Futur Movies:")).setBounds(395, 50, 100, 20);
+        msg = new JLabel("Futur Movies:");
+        msg.setFont(new java.awt.Font("Times New Roman", 3, 20));
+        panel.add(msg).setBounds(395, 50, 150, 20);
         for (int i = 0; i < futurMoviesList.size(); i++) {
             futurMoviesCheckBox.add(new JCheckBox(futurMoviesList.get(i).split(".jpg")[0]));
             panel.add(futurMoviesCheckBox.get(i)).setBounds(395, 110 + 60 * i, 200, 20);
+            futurMoviesCheckBox.get(i).setBackground(new Color(235, 220, 240));
         }
 
         panel.add(addMovies).setBounds(445, 200 + 60 * moviesList.size(), 150, 20);

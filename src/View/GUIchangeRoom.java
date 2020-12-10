@@ -61,7 +61,7 @@ public class GUIchangeRoom extends JDialog {
     @SuppressWarnings("empty-statement")
     private JPanel buildContentPane() throws SQLException {
         panel.setLayout(null);
-        panel.setBackground(Color.orange);
+        panel.setBackground(new Color(235, 220, 240));
 
         panel.add(new JLabel("Choose the movie session:")).setBounds(115, 60, 200, 20);
 

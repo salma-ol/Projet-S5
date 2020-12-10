@@ -5,7 +5,6 @@
  */
 package Controller;
 
-<<<<<<< HEAD:src/Controller/MailIo.java
 import com.barcode_coder.java_barcode.Barcode;
 import com.barcode_coder.java_barcode.BarcodeFactory;
 import com.barcode_coder.java_barcode.BarcodeType;
@@ -13,39 +12,25 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Rectangle;
-=======
->>>>>>> main:src/View/MailIo.java
 import java.io.IOException;
 import java.util.Properties;
-import com.itextpdf.text.pdf.BaseFont;
-import com.itextpdf.text.pdf.PdfContentByte;
-import com.itextpdf.text.pdf.PdfTemplate;
-import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.*;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.net.MalformedURLException;
 import java.sql.Timestamp;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.mail.BodyPart;
-import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Transport;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+import javax.activation.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.mail.util.ByteArrayDataSource;
 
 public class MailIo {
 
     private final String username = "UGCECE@gmail.com";
     private final String password = "ProjetInfo";
-    private final int i = 0;
+    private int i = 0;
 
     public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
@@ -56,7 +41,6 @@ public class MailIo {
         jpg.setAbsolutePosition(250f, 5f);
 
         jpg.scaleToFit(jpg.getWidth() / 2, jpg.getHeight() / 2);
-        
 
         Document document = new Document();
         document.setPageSize(new Rectangle(0,0, png.getWidth(), png.getHeight()));
@@ -64,6 +48,7 @@ public class MailIo {
         PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
         document.open();
+        document.setPageSize(new Rectangle(0,0,png.getWidth()/2, png.getHeight()/2));
 
         PdfContentByte contentByte = writer.getDirectContent();
         PdfTemplate template = contentByte.createTemplate(document.getPageSize().getWidth(), document.getPageSize().getHeight());
@@ -72,28 +57,13 @@ public class MailIo {
 
         BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
 
-<<<<<<< HEAD:src/Controller/MailIo.java
-=======
-//<<<<<<< Updated upstream:src/View/MailIo.java
-        template.setFontAndSize(bf, 9);
-        template.setTextMatrix(220, 500);
-        template.showText("Summary of your order : ");
-        template.setTextMatrix(220, 320);
-        template.showText(number_place + " tickets for " + movie);
-        template.setTextMatrix(220, 310);
-//=======
->>>>>>> main:src/View/MailIo.java
         template.setFontAndSize(bf, 23);
-        template.setTextMatrix(210, 80);
+        template.setTextMatrix(215, 80);
         template.showText(movie);
         template.setFontAndSize(bf, 12);
         template.setTextMatrix(8, 30);
         template.showText(number_place + " tickets");
         template.setTextMatrix(8, 20);
-<<<<<<< HEAD:src/Controller/MailIo.java
-=======
-//>>>>>>> Stashed changes:src/Controller/MailIo.java
->>>>>>> main:src/View/MailIo.java
         template.showText("Final price : " + price * number_place + "€");
         template.setTextMatrix(8, 10);
         template.showText("Projection Room : " + room);
@@ -204,11 +174,7 @@ public class MailIo {
             message.setFrom(new InternetAddress("UGCECE@gmail.com"));
             message.setRecipients(Message.RecipientType.TO,
                     InternetAddress.parse(email));
-<<<<<<< HEAD:src/Controller/MailIo.java
             message.setSubject("Your Reservation");
-=======
-            message.setSubject("Here are your tickets");
->>>>>>> main:src/View/MailIo.java
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
@@ -224,7 +190,7 @@ public class MailIo {
             ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
             generer("./Barcode/barcode_"+id+"_"+i+".png", file_movie, outputStream, date, place, room, price);
             byte[] bytes = outputStream.toByteArray();
-
+                
             DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
             MimeBodyPart pdfBodyPart = new MimeBodyPart();
             pdfBodyPart.setDataHandler(new DataHandler(dataSource));
@@ -242,7 +208,6 @@ public class MailIo {
         } catch (IOException ex) {
             Logger.getLogger(MailIo.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
         i++;
     }
 }

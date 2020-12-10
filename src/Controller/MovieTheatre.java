@@ -10,6 +10,7 @@ import View.GUIpayment;
 import Modele.Movie;
 import View.GUIMovieTheatre;
 import com.itextpdf.text.DocumentException;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -74,23 +75,13 @@ public class MovieTheatre implements ActionListener, ItemListener {
                     if (payment.getEmail() != null && payment.getId() != null) {
                         JOptionPane.showMessageDialog(theatre, "The purchase of your Ticket(s) has been completed successfully.\n\nAn Email has been sent to " + payment.getEmail() + " with your Ticket(s)", "Purchase complete !", JOptionPane.INFORMATION_MESSAGE);
                         MailIo pdf = new MailIo();
-<<<<<<< HEAD
-=======
                         
->>>>>>> main
                         for (Movie movies : theatre.getMoviesList()) {
                             if (movies.getID() == theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getIDMovie()) {
                                 try {
                                     pdf.envoyer_reservation(payment.getEmail(), payment.getId(), movies.getName(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getDate(), Integer.parseInt(theatre.getNumberOfTickets().getText()), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getRoom(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getPrice());
-<<<<<<< HEAD
-                                } catch (MessagingException | DocumentException ex) {
-                                    Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
-=======
                                 } catch (DocumentException ex) {
                                     Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
-                                } catch (MessagingException ex) {
-                                    Logger.getLogger(Movie_Theatre.class.getName()).log(Level.SEVERE, null, ex);
->>>>>>> main
                                 }
                             }
                         }
@@ -104,10 +95,10 @@ public class MovieTheatre implements ActionListener, ItemListener {
             theatre.getPurchase().setVisible(false);
             theatre.getShopping().setVisible(false);
             theatre.getBack().setVisible(false);
-<<<<<<< HEAD
-=======
-            theatre.getCP().setVisible(false) ; 
->>>>>>> main
+            theatre.getCP().setVisible(false); 
+            theatre.getGit().setVisible(false);
+            theatre.getGit2().setVisible(false);
+            theatre.getPanel().setBackground(new Color(208, 203, 203));
         } else {
             theatre.getTicketError().setText("Please enter a number of tickets !");
         }
