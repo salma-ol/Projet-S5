@@ -35,7 +35,7 @@ public class Database {
 
     private void connectionDatabase() throws SQLException {
         //System.out.println("Connexion");
-        connection = DriverManager.getConnection("jdbc:mysql://localhost:3307/movie_theater?autoReconnect=true&useSSL=false", "root", "DevOps197364285");
+        connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/movie_theatre?autoReconnect=true&useSSL=false", "root", "");
     }
 
     private boolean deconnectionDatabase() throws SQLException {

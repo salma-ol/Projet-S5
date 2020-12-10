@@ -32,7 +32,7 @@ public class MailIo {
     private final String password = "ProjetInfo";
     private int i = 0;
 
-    public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
+    public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, float price) throws DocumentException, MalformedURLException, IOException {
 
         Image png = Image.getInstance("pdf.png");
         Image jpg = Image.getInstance(barcode);
@@ -56,9 +56,10 @@ public class MailIo {
         template.beginText();
 
         BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-
+        
         template.setFontAndSize(bf, 23);
-        template.setTextMatrix(215, 80);
+        System.out.println(movie);
+        template.setTextMatrix(180, 80);
         template.showText(movie);
         template.setFontAndSize(bf, 12);
         template.setTextMatrix(8, 30);
@@ -178,7 +179,7 @@ public class MailIo {
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
-            messageBodyPart.setText("Hye " + id + ", "
+            messageBodyPart.setText("Hi " + id + ", "
                     + Newligne + "Thank you for being a fidele client !"
                     + Newligne + "You will find attached your tickets. "
                     + Newligne + "UGC ECE wishes you an excellent movie. "

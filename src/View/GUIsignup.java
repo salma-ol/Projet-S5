@@ -129,7 +129,7 @@ public class GUIsignup extends JDialog{
         
         panel.add(clap).setBounds(30, 250, 185, 180);
         panel.add(cancel).setBounds(500, 400, 100, 20);
-        panel.add(registrationFailed).setBounds(165, 595, 200, 20);
+        panel.add(registrationFailed).setBounds(300, 400, 200, 20);
 
         return panel;
     }

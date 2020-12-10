@@ -77,7 +77,7 @@ public class GUIlogin extends JDialog{
 
         panel.add(confirm).setBounds(95, 180, 100, 20);
         panel.add(cancel).setBounds(295, 180, 100, 20);
-        panel.add(errorAuthentification).setBounds(135, 200, 300, 20);
+        panel.add(errorAuthentification).setBounds(140, 220, 300, 20);
         
         return panel;
     }

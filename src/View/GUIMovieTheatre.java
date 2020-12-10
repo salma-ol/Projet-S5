@@ -49,7 +49,7 @@ public class GUIMovieTheatre extends JFrame {
 
     private ChartPanel CP = new ChartPanel(null);
 
-    private JLabel movie = new JLabel();
+    private final JLabel movie = new JLabel();
     private final JLabel name = new JLabel();
     private final JLabel director = new JLabel();
     private final JLabel genre = new JLabel();
@@ -107,7 +107,7 @@ public class GUIMovieTheatre extends JFrame {
             text.setFont(new java.awt.Font("Times New Roman", 3, 30));
         } else {
             text = new JLabel("WELCOME BACK  " + customer.getID().toUpperCase() + " !");
-            panel.add(text).setBounds(405, 130, 400, 20);
+            panel.add(text).setBounds(385, 130, 500, 20);
             text.setFont(new java.awt.Font("Times New Roman", 3, 30));
             shopping = new JComboBox<>(mysql.getSales(customer.getID()).toArray());
             CP = chart();
