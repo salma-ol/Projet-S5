@@ -83,7 +83,6 @@ public class MailIo {
      * @param mail
      * @param name
      * @param lastname
-     * @return
      * @throws DocumentException
      */
     public int envoyer_confirmation(String mail, String name, String lastname) throws DocumentException {

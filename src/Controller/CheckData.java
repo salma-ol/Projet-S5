@@ -93,9 +93,9 @@ public class CheckData implements ActionListener, ItemListener {
             try {
                 salesPerSession = check.getMysql().getSalesOfaMovie(check.getMoviesList().get(check.getMovies2().getSelectedIndex()).getID());
                 for (int[] salesPerSession1 : salesPerSession) {
-                    for (int j = 0; j < salesPerSession1.length; j++) {
-                        allTickets += salesPerSession1[j];
-                    }
+                    //for (int j = 0; j < salesPerSession1.length; j++) {
+                        allTickets += salesPerSession1[1];
+                    //}
                 }
 
                 guestTickets = check.getMysql().getSalesOfaMovieByCustomer(check.getMoviesList().get(check.getMovies2().getSelectedIndex()).getID(), "Guest");
@@ -133,9 +133,7 @@ public class CheckData implements ActionListener, ItemListener {
 
                     int numbTickets = 0;
                     for (int[] salesPerSession1 : salesPerSession) {
-                        for (int j = 0; j < salesPerSession1.length; j++) {
-                            numbTickets += salesPerSession1[j];
-                        }
+                        numbTickets += salesPerSession1[1];
                     }
                     dataset.addValue(numbTickets, check.getMoviesList().get(n).getName(), " ");
                 } catch (SQLException ex) {
