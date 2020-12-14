@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 public class HomePage implements ActionListener{
     
     private final GUIhomePage home;
+    private boolean verification = false;
     
     public HomePage(GUIhomePage home){
         this.home = home;
@@ -31,19 +32,27 @@ public class HomePage implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        if(home.isIsReturned()) {
+            home.setUser(null);
+        }
+        home.setIsReturned(false);
+        
         if ((home.getMember().isSelected() || home.getEmployee().isSelected()) && home.getUser() == null) {
             GUIlogin login = new GUIlogin(home, true, home.getMember().isSelected());
             home.setUser(login.getUser());
             if (home.getUser() != null) {
                 home.getConfirm().doClick();
             }
+            login.setUser(null);
         } else if (home.getSignup().isSelected()) {
             GUIsignup inscription = new GUIsignup(home, true);
             if (inscription.getRegistered()) {
                 home.getMember().setSelected(true);
                 home.getConfirm().doClick();
             }
-        } else if (home.getGuest().isSelected() || (home.getUser() != null && home.getMember().isSelected() || home.getEmployee().isSelected())) {
+        } else if ((home.getGuest().isSelected() || (home.getUser() != null && home.getMember().isSelected() || home.getEmployee().isSelected()))) {
+            
+            
             try {
                 if (home.getMember().isSelected() || home.getGuest().isSelected()) {
                     GUIMovieTheatre movieTheatre = new GUIMovieTheatre((MemberCustomer) home.getUser());
@@ -57,5 +66,6 @@ public class HomePage implements ActionListener{
             }
             home.dispose();
         }
+        verification = false;
     }
 }

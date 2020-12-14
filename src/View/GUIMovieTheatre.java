@@ -194,13 +194,13 @@ public class GUIMovieTheatre extends JFrame {
 
     public ChartPanel chart() throws SQLException {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        for (int i = 0; i < moviesList.size(); i++) {
-            dataset.addValue(mysql.getSalesOfaMovieByCustomer(moviesList.get(i).getID(),
-                    String.valueOf(customer.getID())), moviesList.get(i).getName(), " ");
+        for (Movie moviesList1 : moviesList) {
+            dataset.addValue(mysql.getSalesOfaMovieByCustomer(moviesList1.getID(), String.valueOf(customer.getID())), moviesList1.getName(), " ");
         }
         JFreeChart barChart = ChartFactory.createBarChart("Tickets bought", "Name of the movies",
                 "Number of tickets", dataset, PlotOrientation.VERTICAL, true, true, false);
         return new ChartPanel(barChart) { // this is the trick to manage setting the size of a chart into a panel!
+            @Override
             public Dimension getPreferredSize() {
                 return new Dimension(400, 400);
             }
@@ -218,7 +218,6 @@ public class GUIMovieTheatre extends JFrame {
 
         movie.setIcon(new ImageIcon("./Movies/" + moviesList.get(movieNumber).getName() + ".jpg"));
         
-
         sessionsDate.removeAllItems();
         for (Session hours : sessionsList) {
             sessionsDate.addItem(hours.getDate());
@@ -295,6 +294,10 @@ public class GUIMovieTheatre extends JFrame {
 
     public JComboBox<Timestamp> getSessionsDate() {
         return sessionsDate;
+    }
+    
+    public void reiniatiliserDate() {
+        sessionsDate.removeAllItems();
     }
 
     public JLabel getPurchase() {

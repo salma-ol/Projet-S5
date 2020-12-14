@@ -32,7 +32,7 @@ public class MailIo {
     private final String password = "ProjetInfo";
     private int i = 0;
 
-    public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, float price) throws DocumentException, MalformedURLException, IOException {
+    public void generer(String barcode, String movie, OutputStream outputStream, Timestamp date, int number_place, int room, double price) throws DocumentException, MalformedURLException, IOException {
 
         Image png = Image.getInstance("pdf.png");
         Image jpg = Image.getInstance(barcode);
@@ -48,7 +48,7 @@ public class MailIo {
         PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 
         document.open();
-        document.setPageSize(new Rectangle(0,0,png.getWidth()/2, png.getHeight()/2));
+        document.setPageSize(new Rectangle(0,0,png.getWidth(), png.getHeight()));
 
         PdfContentByte contentByte = writer.getDirectContent();
         PdfTemplate template = contentByte.createTemplate(document.getPageSize().getWidth(), document.getPageSize().getHeight());
@@ -56,10 +56,9 @@ public class MailIo {
         template.beginText();
 
         BaseFont bf = BaseFont.createFont(BaseFont.TIMES_BOLD, BaseFont.CP1252, BaseFont.NOT_EMBEDDED);
-        
+
         template.setFontAndSize(bf, 23);
-        System.out.println(movie);
-        template.setTextMatrix(180, 80);
+        template.setTextMatrix(210, 80);
         template.showText(movie);
         template.setFontAndSize(bf, 12);
         template.setTextMatrix(8, 30);
@@ -84,7 +83,6 @@ public class MailIo {
      * @param mail
      * @param name
      * @param lastname
-     * @return
      * @throws DocumentException
      */
     public int envoyer_confirmation(String mail, String name, String lastname) throws DocumentException {
@@ -179,7 +177,7 @@ public class MailIo {
 
             BodyPart messageBodyPart = new MimeBodyPart();
             Multipart multipart = new MimeMultipart();// create multipart message 
-            messageBodyPart.setText("Hi " + id + ", "
+            messageBodyPart.setText("Hye " + id + ", "
                     + Newligne + "Thank you for being a fidele client !"
                     + Newligne + "You will find attached your tickets. "
                     + Newligne + "UGC ECE wishes you an excellent movie. "

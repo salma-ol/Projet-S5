@@ -8,8 +8,6 @@ package View;
 import Modele.User;
 import Controller.HomePage;
 import java.awt.Color;
-import java.awt.Component;
-import java.awt.FlowLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
@@ -29,6 +27,9 @@ import javax.swing.JRadioButton;
 public class GUIhomePage extends JFrame {
 
     private static User user = null;
+    
+    
+    private boolean isReturned = false;
 
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private final JButton confirm = new JButton("Confirm");
@@ -44,7 +45,7 @@ public class GUIhomePage extends JFrame {
     private final JLabel projo = new JLabel(new ImageIcon("projo.png"));
     private final JLabel light = new JLabel(new ImageIcon("light.png"));
     
-    private Icon imageIcon = new ImageIcon(this.getClass().getResource("cadre.gif"));
+    private final Icon imageIcon = new ImageIcon(this.getClass().getResource("cadre.gif"));
     private final JLabel background = new JLabel(imageIcon);
 
     private void build() {
@@ -117,9 +118,6 @@ public class GUIhomePage extends JFrame {
         confirm.setVisible(false);
         panel.add(projo).setBounds(0, 255, 176, 340 );
         
-        
-        
-
         confirm.addActionListener(new HomePage(this));
         return panel;
     }
@@ -163,5 +161,13 @@ public class GUIhomePage extends JFrame {
 
     public void setUser(User user) {
         GUIhomePage.user = user;
+    }
+
+    public boolean isIsReturned() {
+        return isReturned;
+    }
+
+    public void setIsReturned(boolean isReturned) {
+        this.isReturned = isReturned;
     }
 }

@@ -26,6 +26,7 @@ public class GUIlogin extends JDialog{
 
     private static User user = null;
     private static boolean isCustomer;
+    private static boolean verification;
     private static final Database mysql = new Database();
 
     private final JPanel panel = new JPanel();
@@ -111,11 +112,11 @@ public class GUIlogin extends JDialog{
     public JTextField getId() {
         return id;
     }
-
+    
     public JPasswordField getPassword() {
         return password;
     }
-
+    
     public JButton getConfirm() {
         return confirm;
     }
@@ -127,4 +128,12 @@ public class GUIlogin extends JDialog{
     public void setUser(User user) {
         GUIlogin.user = user;
     } 
+
+    public boolean isVerification() {
+        return verification;
+    }
+
+    public void setVerification(boolean verification) {
+        GUIlogin.verification = verification;
+    }
 }

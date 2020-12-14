@@ -8,6 +8,7 @@ package Controller;
 import View.GUIhomePage;
 import View.GUIpayment;
 import Modele.Movie;
+import Modele.Session;
 import View.GUIMovieTheatre;
 import com.itextpdf.text.DocumentException;
 import java.awt.Color;
@@ -17,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.sql.SQLException;
-import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.mail.MessagingException;
@@ -80,7 +80,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
                         for (Movie movies : theatre.getMoviesList()) {
                             if (movies.getID() == theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getIDMovie()) {
                                 try {
-                                    pdf.envoyer_reservation(payment.getEmail(), payment.getId(), movies.getName(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getDate(), Integer.parseInt(theatre.getNumberOfTickets().getText()), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getRoom(), payment.getPriceTicket());
+                                    pdf.envoyer_reservation(payment.getEmail(), payment.getId(), movies.getName(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getDate(), Integer.parseInt(theatre.getNumberOfTickets().getText()), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getRoom(), theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getPrice());
                                 } catch (DocumentException | MessagingException ex) {
                                     Logger.getLogger(MovieTheatre.class.getName()).log(Level.SEVERE, null, ex);
                                 }
@@ -105,6 +105,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
         }
         if (event.getSource() == theatre.getHome()) {
             GUIhomePage home = new GUIhomePage();
+            home.setIsReturned(true);
             theatre.dispose();
         }
     }
