@@ -93,9 +93,7 @@ public class CheckData implements ActionListener, ItemListener {
             try {
                 salesPerSession = check.getMysql().getSalesOfaMovie(check.getMoviesList().get(check.getMovies2().getSelectedIndex()).getID());
                 for (int[] salesPerSession1 : salesPerSession) {
-                    //for (int j = 0; j < salesPerSession1.length; j++) {
-                        allTickets += salesPerSession1[1];
-                    //}
+                    allTickets += salesPerSession1[1];
                 }
 
                 guestTickets = check.getMysql().getSalesOfaMovieByCustomer(check.getMoviesList().get(check.getMovies2().getSelectedIndex()).getID(), "Guest");
