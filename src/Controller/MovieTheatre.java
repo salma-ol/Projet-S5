@@ -8,6 +8,7 @@ package Controller;
 import View.GUIhomePage;
 import View.GUIpayment;
 import Modele.Movie;
+import Modele.Session;
 import View.GUIMovieTheatre;
 import com.itextpdf.text.DocumentException;
 import java.awt.Color;
@@ -75,7 +76,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
                     if (payment.getEmail() != null && payment.getId() != null) {
                         JOptionPane.showMessageDialog(theatre, "The purchase of your Ticket(s) has been completed successfully.\n\nAn Email has been sent to " + payment.getEmail() + " with your Ticket(s)", "Purchase complete !", JOptionPane.INFORMATION_MESSAGE);
                         MailIo pdf = new MailIo();
-                        
+
                         for (Movie movies : theatre.getMoviesList()) {
                             if (movies.getID() == theatre.getSessionsList().get(theatre.getSessionsDate().getSelectedIndex()).getIDMovie()) {
                                 try {
@@ -95,7 +96,7 @@ public class MovieTheatre implements ActionListener, ItemListener {
             theatre.getPurchase().setVisible(false);
             theatre.getShopping().setVisible(false);
             theatre.getBack().setVisible(false);
-            theatre.getCP().setVisible(false); 
+            theatre.getCP().setVisible(false);
             theatre.getGit().setVisible(false);
             theatre.getGit2().setVisible(false);
             theatre.getPanel().setBackground(new Color(208, 203, 203));

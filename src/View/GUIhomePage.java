@@ -45,7 +45,7 @@ public class GUIhomePage extends JFrame {
     private final JLabel projo = new JLabel(new ImageIcon("projo.png"));
     private final JLabel light = new JLabel(new ImageIcon("light.png"));
     
-    private Icon imageIcon = new ImageIcon(this.getClass().getResource("cadre.gif"));
+    private final Icon imageIcon = new ImageIcon(this.getClass().getResource("cadre.gif"));
     private final JLabel background = new JLabel(imageIcon);
 
     private void build() {
@@ -118,9 +118,6 @@ public class GUIhomePage extends JFrame {
         confirm.setVisible(false);
         panel.add(projo).setBounds(0, 255, 176, 340 );
         
-        
-        
-
         confirm.addActionListener(new HomePage(this));
         return panel;
     }
