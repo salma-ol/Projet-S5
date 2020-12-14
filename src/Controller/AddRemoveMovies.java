@@ -42,10 +42,14 @@ public class AddRemoveMovies implements ActionListener{
     public void actionPerformed(ActionEvent event) {
         boolean update = false;
         boolean checked = false;
+        //If the employee clicks on the cancel buton we dipose of the GUIaddRemoveMovies frame 
         if (event.getSource() == change.getCancel()) {
             change.dispose();
+        //If the employee clicks on the removie Movie buton 
         } else if (event.getSource() == change.getRemoveMovies()) {
             int movieRemoved = 1;
+            // for every movieCheckBox we see if it is selected. If selected we delete it from our data base.  
+            // check session fai quoi ? 
             for (JCheckBox movieCheckBox : change.getMoviesCheckBox()) {
                 try {
                     if (movieCheckBox.isSelected()) {
@@ -61,7 +65,12 @@ public class AddRemoveMovies implements ActionListener{
                     Logger.getLogger(GUIaddRemoveSessions.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        // If the add movie buton is clicked 
         } else if (event.getSource() == change.getAddMovies()) {
+            /* for every futurMovieCheckBox we see if it is selected. 
+                If it is we ask the employee to write its data and we add it to our data base. 
+                if the movie was succesfuly added to the data base we create a session for the movie by asking the employee 
+                to choose the room time and price of the session. */
             for (JCheckBox futurMovieCheckBox : change.getFuturMoviesCheckBox()) {
                 if (futurMovieCheckBox.isSelected()) {
                     JPanel optionPane = new JPanel();

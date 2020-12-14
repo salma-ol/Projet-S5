@@ -26,9 +26,18 @@ public class ChangeRoom implements ActionListener, ItemListener{
     
     @Override
     public void itemStateChanged(ItemEvent event) {
+        
+        /*
+        If the movies JCombBox is modified: 
+            We remove all the items of the JCombBox sessions
+            We set SessionList with the sessions of the movie selected and we update sessions with SesssionList
+            We upadate capacity and new capcity JLabel  with the room (of the selected session )and its capacity 
+        */
         if (event.getSource() == change.getMovies()) {
+           
             change.getSessions().removeAllItems();
             try {
+                
                 change.setSessionsList( change.getMysql().getSessions(change.getMoviesList().get(change.getMovies().getSelectedIndex()).getID()));
                 for (Session session : change.getSessionsList()) {
                     change.getSessions().addItem(session.getDate());
@@ -38,6 +47,11 @@ public class ChangeRoom implements ActionListener, ItemListener{
             } catch (SQLException ex) {
                 Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
             }
+        /*If the sessions JComboBox is modified: 
+            we remove all the items of the rooms JComboBox
+            We update rooms with the rooms of the session selected 
+             We upadate capacity and new capcity JLabel with the room (of the selected session )and its capacity 
+            */
         } else if (event.getSource() == change.getSessions() && change.getSessions().getSelectedIndex() != -1) {
             change.getRooms().removeAllItems();
             for (Integer room : change.getRoomsList()) {
@@ -51,6 +65,9 @@ public class ChangeRoom implements ActionListener, ItemListener{
             } catch (SQLException ex) {
                 Logger.getLogger(GUIemployee.class.getName()).log(Level.SEVERE, null, ex);
             }
+        /*
+        If the rooms JComboBox is modified we update the newCapacity JLabel with the capacity of the room selected 
+            */
         } else if (event.getSource() == change.getRooms() && change.getRooms().getSelectedIndex() != -1) {
             try {
                 change.getNewCapacity().setText("Capacity: " + change.getMysql().getCapacity(change.getRooms().getItemAt(change.getRooms().getSelectedIndex())));
@@ -66,6 +83,11 @@ public class ChangeRoom implements ActionListener, ItemListener{
         if(event.getSource() == change.getCancel()) {
             change.dispose();
         }
+        /*
+        If confirm buton is selected and the movies JComboBox is not empty: 
+            If we change the room successful  a success message is shown. 
+            If the change is not done a message is shown
+        */
         else if (change.getMovies().getItemCount() != 0 && event.getSource() == change.getConfirm() ) {
             try {
                 if (change.getMysql().changeRoom(change.getSessionsList().get(change.getSessions().getSelectedIndex()), Integer.parseInt(change.getNewCapacity().getText().split(" ")[1]), Integer.parseInt(change.getRooms().getSelectedItem().toString()))) {

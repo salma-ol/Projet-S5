@@ -40,6 +40,12 @@ public class AddRemoveSession implements ActionListener {
         boolean update = false;
         if (event.getSource() == change.getCancel()) {
             change.dispose();
+        /*If the employee clicks on the remove session Button: 
+            for all sessions in the getAllSessionsList() :
+                If the session is selected AND deleted we show a succes message
+                If update = false, whiwh means the session was not removed, we show a failure message. 
+            
+        */
         } else if (event.getSource() == change.getRemoveSessions()) {
             for (int i = 0; i < change.getAllSessionsList().size(); i++) {
                 try {
@@ -54,6 +60,12 @@ public class AddRemoveSession implements ActionListener {
                     Logger.getLogger(GUIaddRemoveSessions.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        /*
+        If the employee clicks on the Add Session button: 
+            We create a new panel where the employee can choose the room, the time of the new session 
+            and in which movie he wants to add the session. 
+            if the session is successfully added to the database we dipose of the change Frame. 
+            */
         } else if (event.getSource() == change.getAddSessions()) {
             try {
                 JPanel optionPane = new JPanel();
@@ -94,6 +106,7 @@ public class AddRemoveSession implements ActionListener {
                 Logger.getLogger(GUIaddRemoveSessions.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        //  If update true = we dispose of the change frame 
         if(update) {
             change.dispose();
         }

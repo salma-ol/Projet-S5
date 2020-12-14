@@ -399,7 +399,7 @@ public class Database {
         //Tableau des sessions du film
         ArrayList<Integer> sessionList = new ArrayList<>();
 
-        state = connection.prepareStatement("SELECT * from `sessions` WHERE ID_Movie = ?");
+        state = connection.prepareStatement("SELECT ID from `sessions` WHERE ID_Movie = ?");
         state.setInt(1, idMovie);
         result = state.executeQuery();
 
@@ -410,7 +410,7 @@ public class Database {
         //tableau des ventes pour chaqye session
         ArrayList<Integer> sales = new ArrayList<>();
         for(int i=0; i<sessionList.size() ; i++){
-            state = connection.prepareStatement("SELECT sales.Number FROM `sales`WHERE sales.ID_Session = ?");
+            state = connection.prepareStatement("SELECT sales.Number FROM `sales` WHERE sales.ID_Session = ?");
             state.setInt(1, sessionList.get(i));
             result = state.executeQuery();
             int tot = 0; 

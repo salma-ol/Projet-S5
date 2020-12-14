@@ -30,6 +30,16 @@ public class Payment implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent event) {
+        /*If the textFields aren't empty 
+            If the CVV is invalid a message pops
+            else if the Card number isn't equal to 16 an error message pops
+            else 
+                if the date of the card is expirer a message pops 
+                else 
+                    if getCardsHolderName() and getCryptogram() hold only numbers 
+                        we send the ticket to the customer if he wrote an email () for guests or his email is already in
+                        the database (member)
+        */        
         if (payment.getCardsHolderName().getText().length() != 0 && payment.getCardNumber().getText().length() != 0 && payment.getCryptogram().getText().length() != 0) {
             if ((payment.getCryptogram().getText().length() != 3 && !payment.getAmex().isSelected()) || (payment.getCryptogram().getText().length() != 4 && payment.getAmex().isSelected())) {
                 payment.getInvalidCard().setText("You enter an Invalid CVV ! Try again ...");
